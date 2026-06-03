@@ -27,6 +27,11 @@ class RecommendationRequest(BaseModel):
     top_k: int = Field(default=3, ge=1, le=10)
     purpose: str | None = Field(default=None, examples=["저녁"])
     companion: str | None = Field(default=None, examples=["친구"])
+    needs_clarification: bool = False
+    clarification_reason: str | None = None
+    error_code: str | None = None
+    suggested_queries: list[str] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
 
 
 class ReActTraceStep(BaseModel):
@@ -188,6 +193,10 @@ class ParsedRecommendationConditions(BaseModel):
     min_review_count: int | None = None
     top_k: int = 3
     warnings: list[str] = Field(default_factory=list)
+    needs_clarification: bool = False
+    clarification_reason: str | None = None
+    error_code: str | None = None
+    suggested_queries: list[str] = Field(default_factory=list)
 
 
 class NaturalLanguageRecommendationResponse(BaseModel):

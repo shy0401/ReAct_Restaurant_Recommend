@@ -213,6 +213,38 @@ button:disabled {
   border: 1px solid #ffe1c8;
 }
 
+.compact-list {
+  margin: 14px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.suggestion-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.suggestion-list button {
+  min-height: 36px;
+  border: 1px solid #ffd9ad;
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: #7a3b16;
+  background: #fff8f0;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.suggestion-list button:hover {
+  border-color: var(--primary);
+  color: var(--primary-strong);
+  transform: translateY(-1px);
+}
+
 .recommend-form,
 .side-card {
   padding: 22px;

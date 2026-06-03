@@ -97,6 +97,11 @@ async def run_agent(request: NaturalLanguageRecommendationRequest) -> NaturalLan
         top_k=parsed.top_k,
         purpose=parsed.purpose,
         companion=parsed.companion,
+        needs_clarification=parsed.needs_clarification,
+        clarification_reason=parsed.clarification_reason,
+        error_code=parsed.error_code,
+        suggested_queries=parsed.suggested_queries,
+        warnings=parsed.warnings,
     )
     result = await service.recommend(recommendation_request, initial_trace=initial_trace)
     trace_text = build_submission_trace_text(query=request.query, parsed_conditions=parsed, result=result)

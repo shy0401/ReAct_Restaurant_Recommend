@@ -5,7 +5,7 @@ import os
 from typing import Any
 
 from app.agent.reflection import reflection_check
-from app.agent.schemas import RecommendationItem, RecommendationRequest, RecommendationResponse, ReActTraceStep
+from app.agent.schemas import ReflectionResult, RecommendationItem, RecommendationRequest, RecommendationResponse, ReActTraceStep
 from app.mcp_clients.mcp_client_manager import MCPClientManager
 from app.services.scoring import (
     MENU_KEYWORD_TO_TYPE,
@@ -59,6 +59,8 @@ class FoodReActAgent:
             inferred = MENU_KEYWORD_TO_TYPE.get(request.menu_keyword)
             if inferred:
                 return inferred
+        if request.clarification_reason and "음식 종류가 모호" in request.clarification_reason:
+            return None
         if request.preference:
             for token in ["한식", "중식", "일식", "양식", "분식", "카페", "고기", "국물", "매운 음식"]:
                 if token in request.preference:
@@ -124,6 +126,56 @@ class FoodReActAgent:
                 deduped.append(item)
                 seen.add(item_id)
         return deduped
+
+    def _clarification_response(self, request: RecommendationRequest, trace: list[ReActTraceStep]) -> RecommendationResponse:
+        reason = request.clarification_reason or "추천을 시작하기 위해 추가 조건 확인이 필요합니다."
+        suggested_queries = request.suggested_queries or [
+            "전주 객사 근처에서 가성비 좋은 맛집 3곳 추천해줘",
+            "서울 홍대 근처 초밥 리뷰 좋은 곳 추천해줘",
+            "대전 구암역 근처 파스타 맛집 추천해줘",
+        ]
+        trace.append(
+            ReActTraceStep(
+                thought="지역이 확인되지 않아 다른 지역 후보로 대체하지 않고 사용자에게 확인을 요청한다.",
+                action="agent.request_clarification",
+                action_input={
+                    "query_region": request.region,
+                    "error_code": request.error_code,
+                    "needs_clarification": request.needs_clarification,
+                },
+                observation={
+                    "error": request.error_code or "clarification_required",
+                    "message": reason,
+                    "final_answer": "지역을 확인할 수 없어 실제 맛집 추천을 중단했습니다. 지역이나 세부 위치를 포함해 다시 입력해주세요.",
+                    "suggested_queries": suggested_queries,
+                },
+            )
+        )
+        reflection = ReflectionResult(
+            approved=False,
+            score=0,
+            issues=[reason],
+            checked_items=["지역 확인 필요", "다른 지역 후보로 대체하지 않음", "대안 쿼리 제시"],
+            improvement_instruction="지역명 또는 세부 위치가 포함된 자연어 요청을 다시 입력해야 합니다.",
+            summary="Reflection 0/10: 지역이 확인되지 않아 맛집 후보를 추천하지 않았습니다.",
+            final_changes=["전주 기본 추천으로 덮지 않고 clarification 응답을 반환했습니다."],
+        )
+        return RecommendationResponse(
+            input=request,
+            plan_steps=PLAN_STEPS,
+            weather={
+                "region": request.region,
+                "condition": None,
+                "temperature": None,
+                "humidity": None,
+                "recommendation_hint": "지역 확인 전에는 날씨 조회를 수행하지 않습니다.",
+                "source": "not_requested",
+            },
+            react_trace=trace,
+            draft_recommendations=[],
+            reflection=reflection,
+            final_recommendations=[],
+        )
 
     async def _attach_place_details(self, trace: list[ReActTraceStep], items: list[dict]) -> list[dict]:
         detailed_items = []
@@ -277,10 +329,35 @@ class FoodReActAgent:
                     "food_type": request.food_type,
                     "menu_keyword": request.menu_keyword,
                     "top_k": top_k,
+                    "needs_clarification": request.needs_clarification,
+                    "error_code": request.error_code,
                 },
                 observation=PLAN_STEPS,
             )
         )
+
+        if request.needs_clarification and request.error_code == "unknown_region":
+            return self._clarification_response(request, trace)
+
+        if request.warnings or request.clarification_reason:
+            trace.append(
+                ReActTraceStep(
+                    thought="입력 조건의 부족하거나 모호한 부분을 확인하고 추천 정확도 개선 안내를 Observation으로 남긴다.",
+                    action="agent.input_warning",
+                    action_input={
+                        "region": request.region,
+                        "food_type": request.food_type,
+                        "menu_keyword": request.menu_keyword,
+                        "preference": request.preference,
+                    },
+                    observation={
+                        "warnings": request.warnings,
+                        "clarification_reason": request.clarification_reason,
+                        "suggested_queries": request.suggested_queries,
+                        "continue_recommendation": True,
+                    },
+                )
+            )
 
         if request.weather:
             weather = {

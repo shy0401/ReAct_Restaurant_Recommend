@@ -54,6 +54,7 @@ export default function App() {
     });
   }, []);
 
+  const hasResponse = Boolean(result);
   const hasResult = Boolean(result?.final_recommendations?.length);
 
   const handleSubmit = async (event) => {
@@ -147,7 +148,7 @@ export default function App() {
           <ErrorBox message={error} />
           {loading && <LoadingSteps />}
 
-          {!loading && !hasResult && (
+          {!loading && !hasResponse && (
             <section className="empty-state">
               <div aria-hidden="true">🍜</div>
               <h2>추천 결과가 여기에 표시됩니다</h2>
@@ -155,7 +156,7 @@ export default function App() {
             </section>
           )}
 
-          {hasResult && (
+          {hasResponse && (
             <>
               <WeatherCard weather={result.weather} />
 
@@ -176,7 +177,28 @@ export default function App() {
                     <span>가격: {parsedConditions.max_price ? `${parsedConditions.max_price.toLocaleString()}원 이하` : "조건 없음"}</span>
                     <span>위치 출처: {conditionValue(parsedConditions.location_source)}</span>
                     <span>신뢰도: {parsedConditions.location_confidence ? Math.round(parsedConditions.location_confidence * 100) + "%" : "조건 없음"}</span>
+                    <span>확인 필요: {parsedConditions.needs_clarification ? "예" : "아니오"}</span>
+                    <span>오류 코드: {conditionValue(parsedConditions.error_code)}</span>
                   </div>
+                  {parsedConditions.clarification_reason && (
+                    <p className="llm-note">{parsedConditions.clarification_reason}</p>
+                  )}
+                  {parsedConditions.warnings?.length > 0 && (
+                    <ul className="compact-list">
+                      {parsedConditions.warnings.map((warning) => (
+                        <li key={warning}>{warning}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {parsedConditions.suggested_queries?.length > 0 && (
+                    <div className="suggestion-list">
+                      {parsedConditions.suggested_queries.map((query) => (
+                        <button type="button" key={query} onClick={() => setForm((current) => ({ ...current, natural_query: query }))}>
+                          {query}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </section>
               )}
 
@@ -188,11 +210,19 @@ export default function App() {
                 <span>{result.input.region} · {result.input.preference}</span>
               </div>
 
-              <div className="recommend-grid">
-                {result.final_recommendations.map((item, index) => (
-                  <RecommendationCard item={item} rank={index + 1} key={item.id} onQuickView={openQuickView} />
-                ))}
-              </div>
+              {hasResult ? (
+                <div className="recommend-grid">
+                  {result.final_recommendations.map((item, index) => (
+                    <RecommendationCard item={item} rank={index + 1} key={item.id} onQuickView={openQuickView} />
+                  ))}
+                </div>
+              ) : (
+                <section className="empty-state">
+                  <div aria-hidden="true">!</div>
+                  <h2>추가 확인이 필요합니다</h2>
+                  <p>Agent가 조건을 무리하게 전주 기본 추천으로 대체하지 않고, 확인이 필요한 내용을 Trace에 남겼습니다.</p>
+                </section>
+              )}
 
               <ReflectionPanel reflection={result.reflection} />
               <ReactTracePanel trace={result.react_trace} />
