@@ -7,6 +7,13 @@ Parsed Conditions:
   "city": "전주",
   "district": "완산구",
   "area": "객사",
+  "landmark": null,
+  "latitude": null,
+  "longitude": null,
+  "location_source": "local_alias",
+  "location_confidence": 0.86,
+  "food_type": null,
+  "menu_keyword": null,
   "preference": "친구와 방문, 저녁, 가성비, 리뷰 좋은 곳",
   "purpose": "저녁",
   "companion": "친구",
@@ -14,7 +21,18 @@ Parsed Conditions:
   "max_price": 15000,
   "min_rating": 4.0,
   "min_review_count": 50,
-  "top_k": 3
+  "top_k": 3,
+  "warnings": [
+    "음식 종류가 모호해 평점/거리/가격 중심으로 추천합니다. 한식, 파스타, 초밥, 카페처럼 음식 종류를 추가하면 정확도가 올라갑니다."
+  ],
+  "needs_clarification": false,
+  "clarification_reason": "음식 종류가 모호해 평점, 거리, 가격 중심으로 추천합니다.",
+  "error_code": null,
+  "suggested_queries": [
+    "객사 근처 파스타 가성비 좋은 곳 추천해줘",
+    "객사 근처 초밥 리뷰 좋은 곳 추천해줘",
+    "객사 근처 카페 디저트 추천해줘"
+  ]
 }
 
 Agent Reasoning Trace:
@@ -31,12 +49,35 @@ Action Input
 Observation
 {
   "region": "전주",
+  "city": "전주",
+  "district": "완산구",
   "area": "객사",
+  "landmark": null,
+  "latitude": null,
+  "longitude": null,
+  "location_source": "local_alias",
+  "location_confidence": 0.86,
+  "food_type": null,
+  "menu_keyword": null,
+  "preference": "친구와 방문, 저녁, 가성비, 리뷰 좋은 곳",
   "purpose": "저녁",
   "companion": "친구",
+  "budget_level": "budget",
   "max_price": 15000,
   "min_rating": 4.0,
-  "min_review_count": 50
+  "min_review_count": 50,
+  "top_k": 3,
+  "warnings": [
+    "음식 종류가 모호해 평점/거리/가격 중심으로 추천합니다. 한식, 파스타, 초밥, 카페처럼 음식 종류를 추가하면 정확도가 올라갑니다."
+  ],
+  "needs_clarification": false,
+  "clarification_reason": "음식 종류가 모호해 평점, 거리, 가격 중심으로 추천합니다.",
+  "error_code": null,
+  "suggested_queries": [
+    "객사 근처 파스타 가성비 좋은 곳 추천해줘",
+    "객사 근처 초밥 리뷰 좋은 곳 추천해줘",
+    "객사 근처 카페 디저트 추천해줘"
+  ]
 }
 
 Step 2
@@ -47,20 +88,57 @@ agent.plan_steps
 Action Input
 {
   "region": "전주",
+  "city": "전주",
+  "district": "완산구",
   "area": "객사",
-  "top_k": 3
+  "landmark": null,
+  "food_type": null,
+  "menu_keyword": null,
+  "top_k": 3,
+  "needs_clarification": false,
+  "error_code": null
 }
 Observation
 [
-  "사용자 요청에서 지역과 세부 위치를 분석한다.",
-  "Weather MCP로 날씨를 확인한다.",
-  "Memory MCP로 최근 식사 기록을 확인한다.",
-  "Restaurant MCP로 후보 맛집을 검색한다.",
-  "Place MCP로 상세 정보를 보강한다.",
-  "Reflection으로 추천 결과를 검토한다."
+  "1. 사용자 요청에서 지역, 도시, 구/군, 세부 위치와 랜드마크를 분석한다.",
+  "2. 음식 종류, 원하는 메뉴, 방문 목적, 가격대, 리뷰 조건을 추출한다.",
+  "3. Weather MCP로 날씨를 확인하되 명시 메뉴/음식 종류를 덮어쓰지 않는다.",
+  "4. Memory MCP로 최근 식사 기록을 확인한다.",
+  "5. Restaurant MCP로 지역, 도시, 세부 위치, 메뉴/음식 종류 조건을 우선 검색한다.",
+  "6. 후보가 부족하면 같은 지역/도시 안에서만 가격, 리뷰, 세부 위치 순서로 완화한다.",
+  "7. 지역/메뉴/음식 종류 하드 미스매치 후보를 제거하고 점수를 계산한다.",
+  "8. Place MCP로 메뉴, 사진, 지도 정보를 보강한다.",
+  "9. Reflection으로 지역, 위치, 메뉴, 가격, 리뷰, 지도/사진 정보를 검토한다.",
+  "10. 최종 추천을 출력한다."
 ]
 
 Step 3
+Thought
+입력 조건의 부족하거나 모호한 부분을 확인하고 추천 정확도 개선 안내를 Observation으로 남긴다.
+Action
+agent.input_warning
+Action Input
+{
+  "region": "전주",
+  "food_type": null,
+  "menu_keyword": null,
+  "preference": "친구와 방문, 저녁, 가성비, 리뷰 좋은 곳"
+}
+Observation
+{
+  "warnings": [
+    "음식 종류가 모호해 평점/거리/가격 중심으로 추천합니다. 한식, 파스타, 초밥, 카페처럼 음식 종류를 추가하면 정확도가 올라갑니다."
+  ],
+  "clarification_reason": "음식 종류가 모호해 평점, 거리, 가격 중심으로 추천합니다.",
+  "suggested_queries": [
+    "객사 근처 파스타 가성비 좋은 곳 추천해줘",
+    "객사 근처 초밥 리뷰 좋은 곳 추천해줘",
+    "객사 근처 카페 디저트 추천해줘"
+  ],
+  "continue_recommendation": true
+}
+
+Step 4
 Thought
 지역 기반 날씨가 필요하므로 Weather MCP 서버를 호출한다.
 Action
@@ -73,10 +151,20 @@ Observation
 {
   "region": "전주",
   "condition": "비",
-  "source": "fallback"
+  "temperature": 22,
+  "humidity": 78,
+  "recommendation_hint": "비 오거나 쌀쌀한 날에는 국물 음식이나 따뜻한 메뉴를 추천합니다.",
+  "source": "fallback",
+  "external_api": {
+    "provider": "open_meteo",
+    "status": "disabled",
+    "fallback_used": "fallback_weather",
+    "message": "WEATHER_API_MODE가 open-meteo가 아니어서 fallback 날씨를 사용합니다."
+  },
+  "fallback_strategy": "날씨 API 실패 시 fallback 날씨를 보조 조건으로만 사용합니다."
 }
 
-Step 4
+Step 5
 Thought
 어제와 오늘 먹은 메뉴를 Memory MCP에 저장해 중복 추천을 피한다.
 Action
@@ -89,12 +177,15 @@ Action Input
 Observation
 {
   "saved": true,
-  "recent_meals": ["입력 없음", "입력 없음"]
+  "recent_meals": [
+    "입력 없음",
+    "입력 없음"
+  ]
 }
 
-Step 5
+Step 6
 Thought
-지역, 세부 위치, 가격, 리뷰 조건을 반영해 Restaurant MCP에서 후보를 검색한다.
+지역, 도시, 세부 위치, 메뉴/음식 종류, 가격, 리뷰 조건을 모두 반영해 Restaurant MCP에서 후보를 검색한다.
 Action
 restaurant.search_restaurants
 Action Input
@@ -103,6 +194,11 @@ Action Input
   "city": "전주",
   "district": "완산구",
   "area": "객사",
+  "landmark": null,
+  "latitude": null,
+  "longitude": null,
+  "food_type": null,
+  "menu_keyword": null,
   "preference": "친구와 방문, 저녁, 가성비, 리뷰 좋은 곳",
   "max_price": 15000,
   "min_rating": 4.0,
@@ -113,20 +209,303 @@ Observation
 [
   {
     "warning": "relaxed_conditions",
+    "messages": [
+      "외부 장소 API 실패 또는 미설정으로 fallback_sample 데이터셋을 사용했습니다."
+    ],
+    "relaxed_fields": [],
+    "not_done": "다른 지역 후보로 임의 대체하지 않음",
+    "external_api": {
+      "provider": "kakao_local",
+      "status": "api_key_missing",
+      "message": "KAKAO_REST_API_KEY가 없어 Kakao Local API를 호출하지 않았습니다.",
+      "fallback_used": "fallback_sample"
+    },
     "fallback_used": "fallback_sample",
-    "not_done": "다른 지역 후보로 임의 대체하지 않음"
+    "requested_region": "전주",
+    "requested_city": "전주",
+    "requested_district": "완산구",
+    "requested_area": "객사",
+    "requested_landmark": null,
+    "requested_food_type": null,
+    "requested_menu_keyword": null
   },
   {
+    "id": "jeonju_010",
     "name": "객사 소담전골",
     "region": "전주",
-    "area": "객사",
+    "category": "한식",
+    "menu": [
+      "김치전골",
+      "제육한상"
+    ],
+    "tags": [
+      "객사",
+      "국물",
+      "한식",
+      "친구모임",
+      "저녁",
+      "가성비"
+    ],
+    "weather_match": [
+      "비",
+      "흐림",
+      "추움"
+    ],
     "price_range": "9000-14000",
     "rating": 4.6,
-    "review_count": 156
+    "address": "전북 전주시 완산구 전주객사3길 12",
+    "reason": "객사 근처에서 친구와 저녁으로 먹기 좋은 따뜻한 전골 한식입니다.",
+    "road_address": "전북 전주시 완산구 전주객사3길 12",
+    "latitude": 35.8189,
+    "longitude": 127.1468,
+    "phone": "063-1030-2030",
+    "opening_hours": "매일 11:00 - 22:00",
+    "review_count": 156,
+    "distance": "0.3km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.8189&mlon=127.1468#map=17/35.8189/127.1468",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.8189&mlon=127.1468#map=17/35.8189/127.1468",
+    "source": "fallback_sample",
+    "menus": [
+      {
+        "name": "김치전골",
+        "price": "11000",
+        "description": "비 오는 날과 저녁 모임에 어울리는 따뜻한 국물 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "제육한상",
+        "price": "12000",
+        "description": "친구와 나눠 먹기 좋은 든든한 한식 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "계란말이",
+        "price": "8000",
+        "description": "전골과 함께 곁들이기 좋은 사이드입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/soup.jpg",
+        "alt": "객사 소담전골 대표 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "area": "객사",
+    "city": "전주",
+    "district": "완산구"
+  },
+  {
+    "id": "jeonju_011",
+    "name": "객리단길 불고기식당",
+    "region": "전주",
+    "category": "고기",
+    "menu": [
+      "뚝배기불고기",
+      "고추장불고기"
+    ],
+    "tags": [
+      "객리단길",
+      "객사",
+      "고기",
+      "국물",
+      "친구모임",
+      "저녁",
+      "가성비"
+    ],
+    "weather_match": [
+      "비",
+      "흐림",
+      "추움",
+      "맑음"
+    ],
+    "price_range": "12000-15000",
+    "rating": 4.5,
+    "address": "전북 전주시 완산구 객리단길 18",
+    "reason": "객리단길에서 부담 없는 가격으로 친구와 저녁 고기 메뉴를 먹기 좋습니다.",
+    "road_address": "전북 전주시 완산구 객리단길 18",
+    "latitude": 35.8201,
+    "longitude": 127.1482,
+    "phone": "063-1031-2031",
+    "opening_hours": "매일 11:30 - 22:30",
+    "review_count": 132,
+    "distance": "0.4km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.8201&mlon=127.1482#map=17/35.8201/127.1482",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.8201&mlon=127.1482#map=17/35.8201/127.1482",
+    "source": "fallback_sample",
+    "menus": [
+      {
+        "name": "뚝배기불고기",
+        "price": "12000",
+        "description": "국물감이 있어 날씨와 저녁 식사 조건에 잘 맞는 고기 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "고추장불고기",
+        "price": "14000",
+        "description": "친구와 함께 먹기 좋은 매콤한 고기 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "된장찌개",
+        "price": "7000",
+        "description": "저녁 식사에 곁들이기 좋은 따뜻한 국물 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/meat.jpg",
+        "alt": "객리단길 불고기식당 대표 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "area": "객사",
+    "city": "전주",
+    "district": "완산구"
+  },
+  {
+    "id": "jeonju_gaeksa_cafe_014",
+    "name": "객리단길 디저트룸",
+    "region": "전주",
+    "area": "객사",
+    "category": "카페",
+    "menu": [
+      "딸기케이크",
+      "아메리카노"
+    ],
+    "menus": [
+      {
+        "name": "딸기케이크",
+        "price": "9000",
+        "description": "객사에서 즐기기 좋은 딸기케이크 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "아메리카노",
+        "price": "11000",
+        "description": "객사에서 즐기기 좋은 아메리카노 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "브런치플레이트",
+        "price": "13000",
+        "description": "객사에서 즐기기 좋은 브런치플레이트 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "객사",
+      "객리단길",
+      "카페",
+      "디저트",
+      "친구"
+    ],
+    "weather_match": [
+      "맑음",
+      "더움",
+      "흐림"
+    ],
+    "price_range": "6000-14000",
+    "rating": 4.4,
+    "review_count": 113,
+    "address": "전북 전주시 완산구 객리단길 22",
+    "road_address": "전북 전주시 완산구 객리단길 22",
+    "latitude": 35.8192,
+    "longitude": 127.1422,
+    "phone": "063-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.3km",
+    "reason": "객리단길에서 식사 후 디저트까지 이어가기 좋은 카페입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/cafe.jpg",
+        "alt": "객리단길 디저트룸 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=35.8192&mlon=127.1422#map=17/35.8192/127.1422",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "전주",
+    "district": "완산구"
+  },
+  {
+    "id": "jeonju_012",
+    "name": "전주객사 나베우동",
+    "region": "전주",
+    "category": "일식",
+    "menu": [
+      "나베우동",
+      "돈카츠정식"
+    ],
+    "tags": [
+      "전주객사",
+      "객사",
+      "국물",
+      "따뜻함",
+      "친구모임",
+      "저녁",
+      "가성비"
+    ],
+    "weather_match": [
+      "비",
+      "흐림",
+      "추움"
+    ],
+    "price_range": "9000-13000",
+    "rating": 4.3,
+    "address": "전북 전주시 완산구 전주객사1길 9",
+    "reason": "객사 근처에서 따뜻한 나베우동과 정식을 부담 없이 먹기 좋은 곳입니다.",
+    "road_address": "전북 전주시 완산구 전주객사1길 9",
+    "latitude": 35.8194,
+    "longitude": 127.1475,
+    "phone": "063-1032-2032",
+    "opening_hours": "매일 11:00 - 21:30",
+    "review_count": 98,
+    "distance": "0.2km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.8194&mlon=127.1475#map=17/35.8194/127.1475",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.8194&mlon=127.1475#map=17/35.8194/127.1475",
+    "source": "fallback_sample",
+    "menus": [
+      {
+        "name": "나베우동",
+        "price": "10000",
+        "description": "비 오는 날 저녁에 잘 맞는 따뜻한 국물 면 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "돈카츠정식",
+        "price": "13000",
+        "description": "친구와 식사할 때 무난하게 고르기 좋은 정식 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "유부초밥",
+        "price": "6000",
+        "description": "가볍게 곁들이기 좋은 사이드 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/japanese.jpg",
+        "alt": "전주객사 나베우동 대표 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "area": "객사",
+    "city": "전주",
+    "district": "완산구"
   }
 ]
 
-Step 6
+Step 7
 Thought
 추천 맛집의 실제 메뉴, 사진, 지도 좌표를 확인해야 하므로 Place MCP를 호출한다.
 Action
@@ -139,13 +518,75 @@ Action Input
 }
 Observation
 {
+  "place_id": "jeonju_010",
+  "photos_found": 0,
   "photo_source": "fallback",
   "photo_is_fallback": true,
   "has_coordinates": true,
-  "map_provider": "leaflet"
+  "map_provider": "leaflet",
+  "source": "fallback_sample",
+  "fallback_messages": [
+    "실제 음식점 사진 API 키가 없거나 사진 결과가 없어 기본 이미지를 표시합니다.",
+    "Google Places API 키가 없어 실제 사진 대신 기본 이미지를 표시합니다."
+  ],
+  "user_message": "실제 장소 API가 실패하거나 사진/메뉴가 없으면 seed/fallback 상세 정보를 사용합니다."
 }
 
-Step 7
+Step 8
+Thought
+추천 맛집의 실제 메뉴, 사진, 지도 좌표를 확인해야 하므로 Place MCP를 호출한다.
+Action
+place.get_place_detail
+Action Input
+{
+  "place_id": "jeonju_011",
+  "name": "객리단길 불고기식당",
+  "region": "전주"
+}
+Observation
+{
+  "place_id": "jeonju_011",
+  "photos_found": 0,
+  "photo_source": "fallback",
+  "photo_is_fallback": true,
+  "has_coordinates": true,
+  "map_provider": "leaflet",
+  "source": "fallback_sample",
+  "fallback_messages": [
+    "실제 음식점 사진 API 키가 없거나 사진 결과가 없어 기본 이미지를 표시합니다.",
+    "Google Places API 키가 없어 실제 사진 대신 기본 이미지를 표시합니다."
+  ],
+  "user_message": "실제 장소 API가 실패하거나 사진/메뉴가 없으면 seed/fallback 상세 정보를 사용합니다."
+}
+
+Step 9
+Thought
+추천 맛집의 실제 메뉴, 사진, 지도 좌표를 확인해야 하므로 Place MCP를 호출한다.
+Action
+place.get_place_detail
+Action Input
+{
+  "place_id": "jeonju_012",
+  "name": "전주객사 나베우동",
+  "region": "전주"
+}
+Observation
+{
+  "place_id": "jeonju_012",
+  "photos_found": 0,
+  "photo_source": "fallback",
+  "photo_is_fallback": true,
+  "has_coordinates": true,
+  "map_provider": "leaflet",
+  "source": "fallback_sample",
+  "fallback_messages": [
+    "실제 음식점 사진 API 키가 없거나 사진 결과가 없어 기본 이미지를 표시합니다.",
+    "Google Places API 키가 없어 실제 사진 대신 기본 이미지를 표시합니다."
+  ],
+  "user_message": "실제 장소 API가 실패하거나 사진/메뉴가 없으면 seed/fallback 상세 정보를 사용합니다."
+}
+
+Step 10
 Thought
 후보별 점수를 계산하고 하드 미스매치 후보를 제거한 뒤 추천 초안을 만든다.
 Action
@@ -153,25 +594,65 @@ agent.score_and_draft
 Action Input
 {
   "candidate_count": 4,
-  "top_k": 3
+  "top_k": 3,
+  "priority": "region/city > area/landmark > menu_keyword > food_type > price > rating/review > weather > recent meals",
+  "search_metadata": [
+    {
+      "warning": "relaxed_conditions",
+      "messages": [
+        "외부 장소 API 실패 또는 미설정으로 fallback_sample 데이터셋을 사용했습니다."
+      ],
+      "relaxed_fields": [],
+      "not_done": "다른 지역 후보로 임의 대체하지 않음",
+      "external_api": {
+        "provider": "kakao_local",
+        "status": "api_key_missing",
+        "message": "KAKAO_REST_API_KEY가 없어 Kakao Local API를 호출하지 않았습니다.",
+        "fallback_used": "fallback_sample"
+      },
+      "fallback_used": "fallback_sample",
+      "requested_region": "전주",
+      "requested_city": "전주",
+      "requested_district": "완산구",
+      "requested_area": "객사",
+      "requested_landmark": null,
+      "requested_food_type": null,
+      "requested_menu_keyword": null
+    }
+  ]
 }
 Observation
 [
-  {"name": "객사 소담전골", "score": 550.4},
-  {"name": "객리단길 불고기식당", "score": 547.1},
-  {"name": "전주객사 나베우동", "score": 543.5}
+  {
+    "name": "객사 소담전골",
+    "score": 550.4,
+    "price_range": "9000-14000"
+  },
+  {
+    "name": "객리단길 불고기식당",
+    "score": 547.1,
+    "price_range": "12000-15000"
+  },
+  {
+    "name": "전주객사 나베우동",
+    "score": 543.5,
+    "price_range": "9000-13000"
+  }
 ]
 
-Step 8
+Step 11
 Thought
-초안 추천이 지역, 세부 위치, 가격, 리뷰, 동행, 저녁 조건을 만족하는지 Reflection으로 검토한다.
+초안 추천이 지역, 세부 위치, 가격, 리뷰, 메뉴 중복, 지도/사진 조건을 만족하는지 Reflection으로 검토한다.
 Action
 reflection.check
 Action Input
 {
   "draft_count": 3,
   "region": "전주",
+  "city": "전주",
   "area": "객사",
+  "food_type": null,
+  "menu_keyword": null,
   "max_price": 15000,
   "min_rating": 4.0,
   "min_review_count": 50
@@ -182,11 +663,137 @@ Observation
   "score": 10,
   "issues": [],
   "checked_items": [
+    "지역 일치 확인",
+    "도시 일치 확인",
+    "구/군 조건 확인",
+    "세부 위치/랜드마크 조건 확인",
+    "음식 종류 일치 확인",
+    "메뉴 키워드 일치 확인",
+    "가격 조건 확인",
+    "평점/리뷰 조건 확인",
+    "날씨는 보조 조건으로만 확인",
+    "최근 먹은 메뉴 중복 여부 확인",
+    "지도 좌표 존재 여부 확인",
+    "대표 메뉴 정보 확인",
+    "사진 source 명확성 확인",
     "가격 상한 15,000원 이하 여부 확인",
     "평점 4.0점 이상 여부 확인",
     "리뷰 수 50개 이상 여부 확인",
     "친구 동행 조건 확인",
-    "저녁 방문 목적 확인"
+    "저녁 방문 목적 확인",
+    "실제 사진 부재 시 fallback 안내 확인",
+    "최종 추천 중 3개가 객사 권역 조건을 충족",
+    "모든 최종 후보가 요청 지역/도시와 일치"
+  ],
+  "improvement_instruction": "명시된 지역, 위치, 메뉴/음식 종류 조건을 우선 만족하므로 현재 추천을 승인합니다.",
+  "summary": "Reflection 점수 10/10: 전국 지역/도시, 위치, 메뉴/음식 종류, 가격, 리뷰, 지도/사진 정보를 검토했습니다.",
+  "final_changes": [
+    "날씨는 보조 설명으로만 반영하고 명시 메뉴/음식 종류를 우선했습니다.",
+    "지역/도시 또는 메뉴 하드 미스매치 후보를 최종 추천에서 제거했습니다.",
+    "세부 위치 조건은 최종 3개 후보에서 확인했습니다."
+  ]
+}
+
+Step 12
+Thought
+모든 도구 호출, 후보 필터링, Reflection 검토를 종합해 최종 추천 결과와 예외 대안을 확정한다.
+Action
+agent.finalize
+Action Input
+{
+  "requested_top_k": 3,
+  "final_count": 3,
+  "reflection_approved": true,
+  "reflection_score": 10
+}
+Observation
+{
+  "final_recommendations": [
+    {
+      "name": "객사 소담전골",
+      "region": "전주",
+      "menu": [
+        "김치전골",
+        "제육한상"
+      ],
+      "score": 550.4
+    },
+    {
+      "name": "객리단길 불고기식당",
+      "region": "전주",
+      "menu": [
+        "뚝배기불고기",
+        "고추장불고기"
+      ],
+      "score": 547.1
+    },
+    {
+      "name": "전주객사 나베우동",
+      "region": "전주",
+      "menu": [
+        "나베우동",
+        "돈카츠정식"
+      ],
+      "score": 543.5
+    }
+  ],
+  "exception_alternative": null,
+  "not_done": "다른 지역 후보로 임의 대체하지 않음"
+}
+
+Candidate Filtering Result:
+[
+  {
+    "name": "객사 소담전골",
+    "score": 550.4,
+    "price_range": "9000-14000"
+  },
+  {
+    "name": "객리단길 불고기식당",
+    "score": 547.1,
+    "price_range": "12000-15000"
+  },
+  {
+    "name": "전주객사 나베우동",
+    "score": 543.5,
+    "price_range": "9000-13000"
+  }
+]
+
+Reflection Review Result:
+{
+  "approved": true,
+  "score": 10,
+  "issues": [],
+  "checked_items": [
+    "지역 일치 확인",
+    "도시 일치 확인",
+    "구/군 조건 확인",
+    "세부 위치/랜드마크 조건 확인",
+    "음식 종류 일치 확인",
+    "메뉴 키워드 일치 확인",
+    "가격 조건 확인",
+    "평점/리뷰 조건 확인",
+    "날씨는 보조 조건으로만 확인",
+    "최근 먹은 메뉴 중복 여부 확인",
+    "지도 좌표 존재 여부 확인",
+    "대표 메뉴 정보 확인",
+    "사진 source 명확성 확인",
+    "가격 상한 15,000원 이하 여부 확인",
+    "평점 4.0점 이상 여부 확인",
+    "리뷰 수 50개 이상 여부 확인",
+    "친구 동행 조건 확인",
+    "저녁 방문 목적 확인",
+    "실제 사진 부재 시 fallback 안내 확인",
+    "최종 추천 중 3개가 객사 권역 조건을 충족",
+    "모든 최종 후보가 요청 지역/도시와 일치"
+  ],
+  "improvement_instruction": "명시된 지역, 위치, 메뉴/음식 종류 조건을 우선 만족하므로 현재 추천을 승인합니다.",
+  "summary": "Reflection 점수 10/10: 전국 지역/도시, 위치, 메뉴/음식 종류, 가격, 리뷰, 지도/사진 정보를 검토했습니다.",
+  "final_changes": [
+    "날씨는 보조 설명으로만 반영하고 명시 메뉴/음식 종류를 우선했습니다.",
+    "지역/도시 또는 메뉴 하드 미스매치 후보를 최종 추천에서 제거했습니다.",
+    "세부 위치 조건은 최종 3개 후보에서 확인했습니다."
   ]
 }
 
@@ -196,16 +803,24 @@ Final Answer:
    - 가격대: 9000-14000
    - 평점: 4.6
    - 리뷰 수: 156
-   - 추천 이유: 객사 근처라 이동이 쉽고, 15,000원 이하 가격 조건과 리뷰 좋은 곳 조건을 만족하며, 친구와 저녁 식사에 적합합니다.
+   - 추천 이유: 객사 근처에서 친구와 저녁으로 먹기 좋은 따뜻한 전골 한식입니다. 객사 근처라 이동이 쉽고 거리 정보(0.3km)를 함께 확인했습니다. 친구와 저녁하기 좋은 분위기와 메뉴 구성을 함께 봤습니다. 예상 가격대 9000-14000가 15,000원 조건에 대체로 맞습니다. 평점 4.6점, 리뷰 156개를 반영했습니다.
+   - 조건 반영: 입력 선호도(친구와 방문, 저녁, 가성비, 리뷰 좋은 곳)가 카테고리, 메뉴, 태그, 방문 목적과 맞습니다. 친구와 저녁하기 좋은 분위기와 메뉴 구성을 함께 봤습니다.
 2. 객리단길 불고기식당
    - 대표 메뉴: 뚝배기불고기, 고추장불고기
    - 가격대: 12000-15000
    - 평점: 4.5
    - 리뷰 수: 132
-   - 추천 이유: 객리단길에 있어 객사 접근성이 좋고, 친구와 저녁으로 먹기 좋은 가성비 고기 메뉴입니다.
+   - 추천 이유: 객리단길에서 부담 없는 가격으로 친구와 저녁 고기 메뉴를 먹기 좋습니다. 객사 근처라 이동이 쉽고 거리 정보(0.4km)를 함께 확인했습니다. 친구와 저녁하기 좋은 분위기와 메뉴 구성을 함께 봤습니다. 예상 가격대 12000-15000가 15,000원 조건에 대체로 맞습니다. 평점 4.5점, 리뷰 132개를 반영했습니다.
+   - 조건 반영: 입력 선호도(친구와 방문, 저녁, 가성비, 리뷰 좋은 곳)가 카테고리, 메뉴, 태그, 방문 목적과 맞습니다. 친구와 저녁하기 좋은 분위기와 메뉴 구성을 함께 봤습니다.
 3. 전주객사 나베우동
    - 대표 메뉴: 나베우동, 돈카츠정식
    - 가격대: 9000-13000
    - 평점: 4.3
    - 리뷰 수: 98
-   - 추천 이유: 전주객사 근처에서 부담 없는 가격으로 따뜻한 저녁 메뉴를 먹기 좋습니다.
+   - 추천 이유: 객사 근처에서 따뜻한 나베우동과 정식을 부담 없이 먹기 좋은 곳입니다. 객사 근처라 이동이 쉽고 거리 정보(0.2km)를 함께 확인했습니다. 친구와 저녁하기 좋은 분위기와 메뉴 구성을 함께 봤습니다. 예상 가격대 9000-13000가 15,000원 조건에 대체로 맞습니다. 평점 4.3점, 리뷰 98개를 반영했습니다.
+   - 조건 반영: 입력 선호도(친구와 방문, 저녁, 가성비, 리뷰 좋은 곳)가 카테고리, 메뉴, 태그, 방문 목적과 맞습니다. 친구와 저녁하기 좋은 분위기와 메뉴 구성을 함께 봤습니다.
+
+Suggested Queries:
+- 객사 근처 파스타 가성비 좋은 곳 추천해줘
+- 객사 근처 초밥 리뷰 좋은 곳 추천해줘
+- 객사 근처 카페 디저트 추천해줘
