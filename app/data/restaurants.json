@@ -1,0 +1,3586 @@
+[
+  {
+    "id": "jeonju_001",
+    "name": "전주 온담국밥",
+    "region": "전주",
+    "category": "한식",
+    "menu": [
+      "콩나물국밥",
+      "순대국밥"
+    ],
+    "tags": [
+      "국물",
+      "따뜻함",
+      "혼밥가능"
+    ],
+    "weather_match": [
+      "비",
+      "흐림",
+      "추움"
+    ],
+    "price_range": "8000-12000",
+    "rating": 4.6,
+    "address": "전북 전주시 완산구 팔달로 12",
+    "reason": "비 오는 날 먹기 좋은 따뜻한 국물 메뉴가 강점입니다.",
+    "road_address": "전북 전주시 완산구 팔달로 12",
+    "latitude": 35.818,
+    "longitude": 127.156,
+    "phone": "063-1001-2001",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 87,
+    "distance": "1.0km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.818&mlon=127.156#map=17/35.818/127.156",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.818&mlon=127.156#map=17/35.818/127.156",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "콩나물국밥",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "순대국밥",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "수육백반",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/soup.jpg",
+        "alt": "전주 온담국밥 대표 이미지",
+        "source": "fallback"
+      }
+    ],
+    "city": "전주"
+  },
+  {
+    "id": "jeonju_002",
+    "name": "전주 비빔마루",
+    "region": "전주",
+    "category": "한식",
+    "menu": [
+      "전주비빔밥",
+      "돌솥비빔밥"
+    ],
+    "tags": [
+      "밥",
+      "정갈함",
+      "지역대표"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림"
+    ],
+    "price_range": "10000-15000",
+    "rating": 4.5,
+    "address": "전북 전주시 완산구 경기전길 21",
+    "reason": "전주다운 한식 한 끼를 원할 때 균형 잡힌 선택입니다.",
+    "road_address": "전북 전주시 완산구 경기전길 21",
+    "latitude": 35.821,
+    "longitude": 127.159,
+    "phone": "063-1002-2002",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 94,
+    "distance": "1.4km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.821&mlon=127.159#map=17/35.821/127.159",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.821&mlon=127.159#map=17/35.821/127.159",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "전주비빔밥",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "돌솥비빔밥",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "수육백반",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/korean.jpg",
+        "alt": "전주 비빔마루 대표 이미지",
+        "source": "fallback"
+      }
+    ],
+    "city": "전주"
+  },
+  {
+    "id": "jeonju_003",
+    "name": "객리단길 매운갈비",
+    "region": "전주",
+    "category": "고기",
+    "menu": [
+      "매운돼지갈비찜",
+      "계란찜"
+    ],
+    "tags": [
+      "매운",
+      "고기",
+      "밥"
+    ],
+    "weather_match": [
+      "비",
+      "흐림",
+      "추움"
+    ],
+    "price_range": "14000-22000",
+    "rating": 4.4,
+    "address": "전북 전주시 완산구 전주객사2길 8",
+    "reason": "얼큰한 고기 메뉴라 흐리거나 비 오는 날 만족감이 높습니다.",
+    "road_address": "전북 전주시 완산구 전주객사2길 8",
+    "latitude": 35.824,
+    "longitude": 127.162,
+    "phone": "063-1003-2003",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 101,
+    "distance": "1.8km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.824&mlon=127.162#map=17/35.824/127.162",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.824&mlon=127.162#map=17/35.824/127.162",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "매운돼지갈비찜",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "계란찜",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "볶음밥",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/meat.jpg",
+        "alt": "객리단길 매운갈비 대표 이미지",
+        "source": "fallback"
+      }
+    ],
+    "area": "객사",
+    "city": "전주",
+    "district": "완산구"
+  },
+  {
+    "id": "jeonju_004",
+    "name": "덕진 우동정",
+    "region": "전주",
+    "category": "일식",
+    "menu": [
+      "유부우동",
+      "돈카츠"
+    ],
+    "tags": [
+      "면",
+      "따뜻함",
+      "가벼움"
+    ],
+    "weather_match": [
+      "비",
+      "추움"
+    ],
+    "price_range": "9000-13000",
+    "rating": 4.2,
+    "address": "전북 전주시 덕진구 명륜길 5",
+    "reason": "따뜻한 면 요리와 바삭한 사이드가 잘 어울립니다.",
+    "road_address": "전북 전주시 덕진구 명륜길 5",
+    "latitude": 35.827,
+    "longitude": 127.165,
+    "phone": "063-1004-2004",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 108,
+    "distance": "2.2km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.827&mlon=127.165#map=17/35.827/127.165",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.827&mlon=127.165#map=17/35.827/127.165",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "유부우동",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "돈카츠",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "미니우동",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/japanese.jpg",
+        "alt": "덕진 우동정 대표 이미지",
+        "source": "fallback"
+      }
+    ],
+    "area": "전북대",
+    "city": "전주",
+    "district": "덕진구"
+  },
+  {
+    "id": "jeonju_005",
+    "name": "한옥마을 파스타집",
+    "region": "전주",
+    "category": "양식",
+    "menu": [
+      "토마토파스타",
+      "버섯리조또"
+    ],
+    "tags": [
+      "면",
+      "양식",
+      "데이트"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림"
+    ],
+    "price_range": "13000-19000",
+    "rating": 4.3,
+    "address": "전북 전주시 완산구 은행로 41",
+    "reason": "한옥마을 산책과 함께 먹기 좋은 무난한 양식 후보입니다.",
+    "road_address": "전북 전주시 완산구 은행로 41",
+    "latitude": 35.83,
+    "longitude": 127.153,
+    "phone": "063-1005-2005",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 115,
+    "distance": "2.6km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.83&mlon=127.153#map=17/35.83/127.153",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.83&mlon=127.153#map=17/35.83/127.153",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "토마토파스타",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "버섯리조또",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "리조또",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/western.jpg",
+        "alt": "한옥마을 파스타집 대표 이미지",
+        "source": "fallback"
+      }
+    ],
+    "area": "한옥마을",
+    "city": "전주",
+    "district": "완산구"
+  },
+  {
+    "id": "jeonju_006",
+    "name": "서신동 짬뽕관",
+    "region": "전주",
+    "category": "중식",
+    "menu": [
+      "해물짬뽕",
+      "탕수육"
+    ],
+    "tags": [
+      "국물",
+      "매운",
+      "면"
+    ],
+    "weather_match": [
+      "비",
+      "흐림",
+      "추움"
+    ],
+    "price_range": "9000-17000",
+    "rating": 4.1,
+    "address": "전북 전주시 완산구 서신천변로 31",
+    "reason": "얼큰한 국물이 필요한 날에 잘 맞는 중식입니다.",
+    "road_address": "전북 전주시 완산구 서신천변로 31",
+    "latitude": 35.833,
+    "longitude": 127.156,
+    "phone": "063-1006-2006",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 122,
+    "distance": "0.6km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.833&mlon=127.156#map=17/35.833/127.156",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.833&mlon=127.156#map=17/35.833/127.156",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "해물짬뽕",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "탕수육",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "군만두",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/soup.jpg",
+        "alt": "서신동 짬뽕관 대표 이미지",
+        "source": "fallback"
+      }
+    ],
+    "city": "전주"
+  },
+  {
+    "id": "jeonju_007",
+    "name": "전북대 분식당",
+    "region": "전주",
+    "category": "분식",
+    "menu": [
+      "떡볶이",
+      "김밥",
+      "튀김"
+    ],
+    "tags": [
+      "매운",
+      "가벼움",
+      "간편함"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림",
+      "비"
+    ],
+    "price_range": "5000-10000",
+    "rating": 4.0,
+    "address": "전북 전주시 덕진구 권삼득로 77",
+    "reason": "간단하지만 매콤한 메뉴를 원할 때 부담이 적습니다.",
+    "road_address": "전북 전주시 덕진구 권삼득로 77",
+    "latitude": 35.815,
+    "longitude": 127.159,
+    "phone": "063-1007-2007",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 129,
+    "distance": "1.0km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.815&mlon=127.159#map=17/35.815/127.159",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.815&mlon=127.159#map=17/35.815/127.159",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "떡볶이",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "김밥",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "튀김",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/snack.jpg",
+        "alt": "전북대 분식당 대표 이미지",
+        "source": "fallback"
+      }
+    ],
+    "area": "전북대",
+    "city": "전주",
+    "district": "덕진구"
+  },
+  {
+    "id": "jeonju_008",
+    "name": "효자동 삼계탕",
+    "region": "전주",
+    "category": "한식",
+    "menu": [
+      "삼계탕",
+      "닭곰탕"
+    ],
+    "tags": [
+      "국물",
+      "따뜻함",
+      "보양식"
+    ],
+    "weather_match": [
+      "비",
+      "추움",
+      "더움"
+    ],
+    "price_range": "13000-18000",
+    "rating": 4.7,
+    "address": "전북 전주시 완산구 홍산로 91",
+    "reason": "따뜻하고 든든한 국물 한식으로 날씨 영향을 덜 받습니다.",
+    "road_address": "전북 전주시 완산구 홍산로 91",
+    "latitude": 35.818,
+    "longitude": 127.162,
+    "phone": "063-1008-2008",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 136,
+    "distance": "1.4km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.818&mlon=127.162#map=17/35.818/127.162",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.818&mlon=127.162#map=17/35.818/127.162",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "삼계탕",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "닭곰탕",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "수육백반",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/soup.jpg",
+        "alt": "효자동 삼계탕 대표 이미지",
+        "source": "fallback"
+      }
+    ],
+    "city": "전주"
+  },
+  {
+    "id": "jeonju_009",
+    "name": "전주 느린카페",
+    "region": "전주",
+    "category": "카페",
+    "menu": [
+      "브런치",
+      "핸드드립",
+      "샌드위치"
+    ],
+    "tags": [
+      "카페",
+      "가벼움",
+      "디저트"
+    ],
+    "weather_match": [
+      "맑음",
+      "더움"
+    ],
+    "price_range": "7000-15000",
+    "rating": 4.2,
+    "address": "전북 전주시 완산구 전라감영로 9",
+    "reason": "가벼운 식사와 커피를 함께 해결하기 좋습니다.",
+    "road_address": "전북 전주시 완산구 전라감영로 9",
+    "latitude": 35.821,
+    "longitude": 127.165,
+    "phone": "063-1009-2009",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 143,
+    "distance": "1.8km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.821&mlon=127.165#map=17/35.821/127.165",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.821&mlon=127.165#map=17/35.821/127.165",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "브런치",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "핸드드립",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "샌드위치",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/cafe.jpg",
+        "alt": "전주 느린카페 대표 이미지",
+        "source": "fallback"
+      }
+    ],
+    "city": "전주"
+  },
+  {
+    "id": "seoul_001",
+    "name": "종로 맑은곰탕",
+    "region": "서울",
+    "category": "국물",
+    "menu": [
+      "곰탕",
+      "수육"
+    ],
+    "tags": [
+      "국물",
+      "따뜻함",
+      "고기"
+    ],
+    "weather_match": [
+      "비",
+      "흐림",
+      "추움"
+    ],
+    "price_range": "11000-18000",
+    "rating": 4.6,
+    "address": "서울 종로구 종로 22",
+    "reason": "맑고 따뜻한 국물로 비 오는 날 속을 편하게 해줍니다.",
+    "road_address": "서울 종로구 종로 22",
+    "latitude": 35.824,
+    "longitude": 127.153,
+    "phone": "02-1010-2010",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 150,
+    "distance": "2.2km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.824&mlon=127.153#map=17/35.824/127.153",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.824&mlon=127.153#map=17/35.824/127.153",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "곰탕",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "수육",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "공깃밥",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/soup.jpg",
+        "alt": "종로 맑은곰탕 대표 이미지",
+        "source": "fallback"
+      }
+    ],
+    "city": "서울"
+  },
+  {
+    "id": "seoul_002",
+    "name": "성수 라멘소리",
+    "region": "서울",
+    "category": "일식",
+    "menu": [
+      "돈코츠라멘",
+      "교자"
+    ],
+    "tags": [
+      "면",
+      "국물",
+      "따뜻함"
+    ],
+    "weather_match": [
+      "비",
+      "추움"
+    ],
+    "price_range": "10000-15000",
+    "rating": 4.4,
+    "address": "서울 성동구 연무장길 10",
+    "reason": "진한 국물 면 요리를 원할 때 잘 맞습니다.",
+    "road_address": "서울 성동구 연무장길 10",
+    "latitude": 35.827,
+    "longitude": 127.156,
+    "phone": "02-1011-2011",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 157,
+    "distance": "2.6km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.827&mlon=127.156#map=17/35.827/127.156",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.827&mlon=127.156#map=17/35.827/127.156",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "돈코츠라멘",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "교자",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "미니우동",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/soup.jpg",
+        "alt": "성수 라멘소리 대표 이미지",
+        "source": "fallback"
+      }
+    ],
+    "city": "서울"
+  },
+  {
+    "id": "seoul_003",
+    "name": "강남 샐러드볼",
+    "region": "서울",
+    "category": "양식",
+    "menu": [
+      "그릴치킨샐러드",
+      "수프"
+    ],
+    "tags": [
+      "가벼움",
+      "샐러드",
+      "건강식"
+    ],
+    "weather_match": [
+      "맑음",
+      "더움"
+    ],
+    "price_range": "10000-16000",
+    "rating": 4.1,
+    "address": "서울 강남구 테헤란로 101",
+    "reason": "가벼운 음식을 선호할 때 부담 없는 선택입니다.",
+    "road_address": "서울 강남구 테헤란로 101",
+    "latitude": 35.83,
+    "longitude": 127.159,
+    "phone": "02-1012-2012",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 164,
+    "distance": "0.6km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.83&mlon=127.159#map=17/35.83/127.159",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.83&mlon=127.159#map=17/35.83/127.159",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "그릴치킨샐러드",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "수프",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "리조또",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/western.jpg",
+        "alt": "강남 샐러드볼 대표 이미지",
+        "source": "fallback"
+      }
+    ],
+    "city": "서울"
+  },
+  {
+    "id": "seoul_004",
+    "name": "홍대 마라공방",
+    "region": "서울",
+    "category": "중식",
+    "menu": [
+      "마라탕",
+      "꿔바로우"
+    ],
+    "tags": [
+      "매운",
+      "국물",
+      "중식"
+    ],
+    "weather_match": [
+      "비",
+      "흐림",
+      "추움"
+    ],
+    "price_range": "10000-18000",
+    "rating": 4.2,
+    "address": "서울 마포구 와우산로 29",
+    "reason": "매운 국물 선호가 있을 때 만족도가 높은 후보입니다.",
+    "road_address": "서울 마포구 와우산로 29",
+    "latitude": 35.833,
+    "longitude": 127.162,
+    "phone": "02-1013-2013",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 171,
+    "distance": "1.0km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.833&mlon=127.162#map=17/35.833/127.162",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.833&mlon=127.162#map=17/35.833/127.162",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "마라탕",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "꿔바로우",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "탕수육",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/soup.jpg",
+        "alt": "홍대 마라공방 대표 이미지",
+        "source": "fallback"
+      }
+    ],
+    "city": "서울"
+  },
+  {
+    "id": "seoul_005",
+    "name": "이태원 그릴하우스",
+    "region": "서울",
+    "category": "고기",
+    "menu": [
+      "스테이크",
+      "버거"
+    ],
+    "tags": [
+      "고기",
+      "양식",
+      "든든함"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림"
+    ],
+    "price_range": "16000-30000",
+    "rating": 4.3,
+    "address": "서울 용산구 이태원로 55",
+    "reason": "고기 중심의 든든한 양식을 먹고 싶을 때 좋습니다.",
+    "road_address": "서울 용산구 이태원로 55",
+    "latitude": 35.815,
+    "longitude": 127.165,
+    "phone": "02-1014-2014",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 178,
+    "distance": "1.4km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.815&mlon=127.165#map=17/35.815/127.165",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.815&mlon=127.165#map=17/35.815/127.165",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "스테이크",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "버거",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "계란찜",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/meat.jpg",
+        "alt": "이태원 그릴하우스 대표 이미지",
+        "source": "fallback"
+      }
+    ],
+    "city": "서울"
+  },
+  {
+    "id": "busan_001",
+    "name": "부산 돼지국밥길",
+    "region": "부산",
+    "category": "한식",
+    "menu": [
+      "돼지국밥",
+      "수육백반"
+    ],
+    "tags": [
+      "국물",
+      "따뜻함",
+      "고기"
+    ],
+    "weather_match": [
+      "비",
+      "흐림",
+      "추움"
+    ],
+    "price_range": "9000-14000",
+    "rating": 4.7,
+    "address": "부산 부산진구 서면로 18",
+    "reason": "부산의 지역성을 살린 따뜻한 국물 메뉴입니다.",
+    "road_address": "부산 부산진구 서면로 18",
+    "latitude": 35.818,
+    "longitude": 127.153,
+    "phone": "051-1015-2015",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 185,
+    "distance": "1.8km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.818&mlon=127.153#map=17/35.818/127.153",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.818&mlon=127.153#map=17/35.818/127.153",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "돼지국밥",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "수육백반",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "된장찌개",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/soup.jpg",
+        "alt": "부산 돼지국밥길 대표 이미지",
+        "source": "fallback"
+      }
+    ],
+    "city": "부산"
+  },
+  {
+    "id": "busan_002",
+    "name": "해운대 밀면집",
+    "region": "부산",
+    "category": "면",
+    "menu": [
+      "물밀면",
+      "비빔밀면"
+    ],
+    "tags": [
+      "면",
+      "가벼움",
+      "시원함"
+    ],
+    "weather_match": [
+      "맑음",
+      "더움"
+    ],
+    "price_range": "8000-11000",
+    "rating": 4.3,
+    "address": "부산 해운대구 구남로 33",
+    "reason": "더운 날 가볍고 시원하게 먹기 좋습니다.",
+    "road_address": "부산 해운대구 구남로 33",
+    "latitude": 35.821,
+    "longitude": 127.156,
+    "phone": "051-1016-2016",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 192,
+    "distance": "2.2km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.821&mlon=127.156#map=17/35.821/127.156",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.821&mlon=127.156#map=17/35.821/127.156",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "물밀면",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "비빔밀면",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "만두",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/noodle.jpg",
+        "alt": "해운대 밀면집 대표 이미지",
+        "source": "fallback"
+      }
+    ],
+    "city": "부산"
+  },
+  {
+    "id": "busan_003",
+    "name": "광안리 초밥정",
+    "region": "부산",
+    "category": "일식",
+    "menu": [
+      "모둠초밥",
+      "우동"
+    ],
+    "tags": [
+      "일식",
+      "가벼움",
+      "해산물"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림"
+    ],
+    "price_range": "15000-26000",
+    "rating": 4.4,
+    "address": "부산 수영구 광안해변로 12",
+    "reason": "해산물 기반의 깔끔한 식사를 원할 때 좋습니다.",
+    "road_address": "부산 수영구 광안해변로 12",
+    "latitude": 35.824,
+    "longitude": 127.159,
+    "phone": "051-1017-2017",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 199,
+    "distance": "2.6km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.824&mlon=127.159#map=17/35.824/127.159",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.824&mlon=127.159#map=17/35.824/127.159",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "모둠초밥",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "우동",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "미니우동",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/japanese.jpg",
+        "alt": "광안리 초밥정 대표 이미지",
+        "source": "fallback"
+      }
+    ],
+    "city": "부산"
+  },
+  {
+    "id": "busan_004",
+    "name": "남포동 칼국수",
+    "region": "부산",
+    "category": "한식",
+    "menu": [
+      "바지락칼국수",
+      "만두"
+    ],
+    "tags": [
+      "국물",
+      "면",
+      "따뜻함"
+    ],
+    "weather_match": [
+      "비",
+      "흐림",
+      "추움"
+    ],
+    "price_range": "8000-13000",
+    "rating": 4.2,
+    "address": "부산 중구 남포길 44",
+    "reason": "비 오는 날 따뜻한 바지락 국물이 잘 어울립니다.",
+    "road_address": "부산 중구 남포길 44",
+    "latitude": 35.827,
+    "longitude": 127.162,
+    "phone": "051-1018-2018",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 206,
+    "distance": "0.6km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.827&mlon=127.162#map=17/35.827/127.162",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.827&mlon=127.162#map=17/35.827/127.162",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "바지락칼국수",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "만두",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "수육백반",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/soup.jpg",
+        "alt": "남포동 칼국수 대표 이미지",
+        "source": "fallback"
+      }
+    ],
+    "city": "부산"
+  },
+  {
+    "id": "daejeon_001",
+    "name": "대전 칼칼두부",
+    "region": "대전",
+    "category": "한식",
+    "menu": [
+      "두부전골",
+      "김치찌개"
+    ],
+    "tags": [
+      "국물",
+      "매운",
+      "따뜻함"
+    ],
+    "weather_match": [
+      "비",
+      "흐림",
+      "추움"
+    ],
+    "price_range": "9000-15000",
+    "rating": 4.4,
+    "address": "대전 서구 둔산로 17",
+    "reason": "얼큰하고 따뜻한 한식 국물 메뉴입니다.",
+    "road_address": "대전 서구 둔산로 17",
+    "latitude": 35.83,
+    "longitude": 127.165,
+    "phone": "042-1019-2019",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 213,
+    "distance": "1.0km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.83&mlon=127.165#map=17/35.83/127.165",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.83&mlon=127.165#map=17/35.83/127.165",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "두부전골",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "김치찌개",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "수육백반",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/soup.jpg",
+        "alt": "대전 칼칼두부 대표 이미지",
+        "source": "fallback"
+      }
+    ]
+  },
+  {
+    "id": "daegu_001",
+    "name": "대구 매운찜갈비",
+    "region": "대구",
+    "category": "고기",
+    "menu": [
+      "매운찜갈비",
+      "볶음밥"
+    ],
+    "tags": [
+      "매운",
+      "고기",
+      "밥"
+    ],
+    "weather_match": [
+      "흐림",
+      "비",
+      "추움"
+    ],
+    "price_range": "15000-25000",
+    "rating": 4.5,
+    "address": "대구 중구 동덕로 20",
+    "reason": "매운 음식과 고기 선호를 동시에 만족합니다.",
+    "road_address": "대구 중구 동덕로 20",
+    "latitude": 35.833,
+    "longitude": 127.153,
+    "phone": "053-1020-2020",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 220,
+    "distance": "1.4km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.833&mlon=127.153#map=17/35.833/127.153",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.833&mlon=127.153#map=17/35.833/127.153",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "매운찜갈비",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "볶음밥",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "계란찜",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/meat.jpg",
+        "alt": "대구 매운찜갈비 대표 이미지",
+        "source": "fallback"
+      }
+    ]
+  },
+  {
+    "id": "gwangju_001",
+    "name": "광주 한상차림",
+    "region": "광주",
+    "category": "한식",
+    "menu": [
+      "백반",
+      "제육볶음"
+    ],
+    "tags": [
+      "밥",
+      "고기",
+      "정갈함"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림"
+    ],
+    "price_range": "9000-14000",
+    "rating": 4.3,
+    "address": "광주 동구 충장로 11",
+    "reason": "밥 중심의 든든한 한식을 먹고 싶을 때 좋습니다.",
+    "road_address": "광주 동구 충장로 11",
+    "latitude": 35.815,
+    "longitude": 127.156,
+    "phone": "062-1021-2021",
+    "opening_hours": "매일 10:00 - 21:00",
+    "review_count": 227,
+    "distance": "1.8km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.815&mlon=127.156#map=17/35.815/127.156",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.815&mlon=127.156#map=17/35.815/127.156",
+    "source": "fallback",
+    "menus": [
+      {
+        "name": "백반",
+        "price": "8000",
+        "description": "추천 조건과 가장 잘 맞는 대표 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "제육볶음",
+        "price": "9500",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "수육백반",
+        "price": "11000",
+        "description": "함께 선택하기 좋은 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/korean.jpg",
+        "alt": "광주 한상차림 대표 이미지",
+        "source": "fallback"
+      }
+    ]
+  },
+  {
+    "id": "jeonju_010",
+    "name": "객사 소담전골",
+    "region": "전주",
+    "category": "한식",
+    "menu": [
+      "김치전골",
+      "제육한상"
+    ],
+    "tags": [
+      "객사",
+      "국물",
+      "한식",
+      "친구모임",
+      "저녁",
+      "가성비"
+    ],
+    "weather_match": [
+      "비",
+      "흐림",
+      "추움"
+    ],
+    "price_range": "9000-14000",
+    "rating": 4.6,
+    "address": "전북 전주시 완산구 전주객사3길 12",
+    "reason": "객사 근처에서 친구와 저녁으로 먹기 좋은 따뜻한 전골 한식입니다.",
+    "road_address": "전북 전주시 완산구 전주객사3길 12",
+    "latitude": 35.8189,
+    "longitude": 127.1468,
+    "phone": "063-1030-2030",
+    "opening_hours": "매일 11:00 - 22:00",
+    "review_count": 156,
+    "distance": "0.3km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.8189&mlon=127.1468#map=17/35.8189/127.1468",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.8189&mlon=127.1468#map=17/35.8189/127.1468",
+    "source": "fallback_sample",
+    "menus": [
+      {
+        "name": "김치전골",
+        "price": "11000",
+        "description": "비 오는 날과 저녁 모임에 어울리는 따뜻한 국물 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "제육한상",
+        "price": "12000",
+        "description": "친구와 나눠 먹기 좋은 든든한 한식 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "계란말이",
+        "price": "8000",
+        "description": "전골과 함께 곁들이기 좋은 사이드입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/soup.jpg",
+        "alt": "객사 소담전골 대표 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "area": "객사",
+    "city": "전주",
+    "district": "완산구"
+  },
+  {
+    "id": "jeonju_011",
+    "name": "객리단길 불고기식당",
+    "region": "전주",
+    "category": "고기",
+    "menu": [
+      "뚝배기불고기",
+      "고추장불고기"
+    ],
+    "tags": [
+      "객리단길",
+      "객사",
+      "고기",
+      "국물",
+      "친구모임",
+      "저녁",
+      "가성비"
+    ],
+    "weather_match": [
+      "비",
+      "흐림",
+      "추움",
+      "맑음"
+    ],
+    "price_range": "12000-15000",
+    "rating": 4.5,
+    "address": "전북 전주시 완산구 객리단길 18",
+    "reason": "객리단길에서 부담 없는 가격으로 친구와 저녁 고기 메뉴를 먹기 좋습니다.",
+    "road_address": "전북 전주시 완산구 객리단길 18",
+    "latitude": 35.8201,
+    "longitude": 127.1482,
+    "phone": "063-1031-2031",
+    "opening_hours": "매일 11:30 - 22:30",
+    "review_count": 132,
+    "distance": "0.4km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.8201&mlon=127.1482#map=17/35.8201/127.1482",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.8201&mlon=127.1482#map=17/35.8201/127.1482",
+    "source": "fallback_sample",
+    "menus": [
+      {
+        "name": "뚝배기불고기",
+        "price": "12000",
+        "description": "국물감이 있어 날씨와 저녁 식사 조건에 잘 맞는 고기 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "고추장불고기",
+        "price": "14000",
+        "description": "친구와 함께 먹기 좋은 매콤한 고기 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "된장찌개",
+        "price": "7000",
+        "description": "저녁 식사에 곁들이기 좋은 따뜻한 국물 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/meat.jpg",
+        "alt": "객리단길 불고기식당 대표 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "area": "객사",
+    "city": "전주",
+    "district": "완산구"
+  },
+  {
+    "id": "jeonju_012",
+    "name": "전주객사 나베우동",
+    "region": "전주",
+    "category": "일식",
+    "menu": [
+      "나베우동",
+      "돈카츠정식"
+    ],
+    "tags": [
+      "전주객사",
+      "객사",
+      "국물",
+      "따뜻함",
+      "친구모임",
+      "저녁",
+      "가성비"
+    ],
+    "weather_match": [
+      "비",
+      "흐림",
+      "추움"
+    ],
+    "price_range": "9000-13000",
+    "rating": 4.3,
+    "address": "전북 전주시 완산구 전주객사1길 9",
+    "reason": "객사 근처에서 따뜻한 나베우동과 정식을 부담 없이 먹기 좋은 곳입니다.",
+    "road_address": "전북 전주시 완산구 전주객사1길 9",
+    "latitude": 35.8194,
+    "longitude": 127.1475,
+    "phone": "063-1032-2032",
+    "opening_hours": "매일 11:00 - 21:30",
+    "review_count": 98,
+    "distance": "0.2km",
+    "map_url": "https://www.openstreetmap.org/?mlat=35.8194&mlon=127.1475#map=17/35.8194/127.1475",
+    "place_url": "https://www.openstreetmap.org/?mlat=35.8194&mlon=127.1475#map=17/35.8194/127.1475",
+    "source": "fallback_sample",
+    "menus": [
+      {
+        "name": "나베우동",
+        "price": "10000",
+        "description": "비 오는 날 저녁에 잘 맞는 따뜻한 국물 면 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "돈카츠정식",
+        "price": "13000",
+        "description": "친구와 식사할 때 무난하게 고르기 좋은 정식 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "유부초밥",
+        "price": "6000",
+        "description": "가볍게 곁들이기 좋은 사이드 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "photos": [
+      {
+        "url": "/placeholders/japanese.jpg",
+        "alt": "전주객사 나베우동 대표 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "area": "객사",
+    "city": "전주",
+    "district": "완산구"
+  },
+  {
+    "id": "jeonju_jbnu_pasta_001",
+    "name": "전북대 파스타온",
+    "region": "전주",
+    "area": "전북대",
+    "category": "양식",
+    "menu": [
+      "토마토파스타",
+      "크림파스타"
+    ],
+    "menus": [
+      {
+        "name": "토마토파스타",
+        "price": "9000",
+        "description": "전북대에서 즐기기 좋은 토마토파스타 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "크림파스타",
+        "price": "11000",
+        "description": "전북대에서 즐기기 좋은 크림파스타 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "버섯리조또",
+        "price": "13000",
+        "description": "전북대에서 즐기기 좋은 버섯리조또 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "전북대",
+      "덕진",
+      "파스타",
+      "양식",
+      "가성비",
+      "저녁",
+      "친구"
+    ],
+    "weather_match": [
+      "맑음",
+      "비",
+      "흐림"
+    ],
+    "price_range": "9000-15000",
+    "rating": 4.4,
+    "review_count": 132,
+    "address": "전북 전주시 덕진구 전북대앞길 12",
+    "road_address": "전북 전주시 덕진구 전북대앞길 12",
+    "latitude": 35.8468,
+    "longitude": 127.1292,
+    "phone": "063-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.5km",
+    "reason": "전북대 근처에서 부담 없는 가격으로 파스타와 리조또를 먹기 좋아 친구와 저녁 방문에 어울립니다.",
+    "photos": [
+      {
+        "url": "/placeholders/western.jpg",
+        "alt": "전북대 파스타온 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=35.8468&mlon=127.1292#map=17/35.8468/127.1292",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "전주",
+    "district": "덕진구"
+  },
+  {
+    "id": "jeonju_jbnu_pasta_002",
+    "name": "덕진 캠퍼스파스타",
+    "region": "전주",
+    "area": "전북대",
+    "category": "양식",
+    "menu": [
+      "알리오올리오",
+      "베이컨크림파스타"
+    ],
+    "menus": [
+      {
+        "name": "알리오올리오",
+        "price": "9000",
+        "description": "전북대에서 즐기기 좋은 알리오올리오 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "베이컨크림파스타",
+        "price": "11000",
+        "description": "전북대에서 즐기기 좋은 베이컨크림파스타 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "고르곤졸라피자",
+        "price": "13000",
+        "description": "전북대에서 즐기기 좋은 고르곤졸라피자 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "전북대",
+      "덕진",
+      "파스타",
+      "피자",
+      "양식",
+      "가성비"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림",
+      "비"
+    ],
+    "price_range": "10000-16000",
+    "rating": 4.3,
+    "review_count": 96,
+    "address": "전북 전주시 덕진구 전북대학교로 24",
+    "road_address": "전북 전주시 덕진구 전북대학교로 24",
+    "latitude": 35.8475,
+    "longitude": 127.1305,
+    "phone": "063-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.7km",
+    "reason": "전북대학교 인근 양식집으로 파스타 선택지가 많고 가격대가 비교적 합리적입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/western.jpg",
+        "alt": "덕진 캠퍼스파스타 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=35.8475&mlon=127.1305#map=17/35.8475/127.1305",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "전주",
+    "district": "덕진구"
+  },
+  {
+    "id": "jeonju_jbnu_pasta_003",
+    "name": "전북대 리틀이탈리",
+    "region": "전주",
+    "area": "전북대",
+    "category": "양식",
+    "menu": [
+      "봉골레파스타",
+      "라구파스타"
+    ],
+    "menus": [
+      {
+        "name": "봉골레파스타",
+        "price": "9000",
+        "description": "전북대에서 즐기기 좋은 봉골레파스타 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "라구파스타",
+        "price": "11000",
+        "description": "전북대에서 즐기기 좋은 라구파스타 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "마르게리타피자",
+        "price": "13000",
+        "description": "전북대에서 즐기기 좋은 마르게리타피자 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "전북대",
+      "덕진",
+      "파스타",
+      "이탈리안",
+      "친구",
+      "저녁"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림"
+    ],
+    "price_range": "11000-16000",
+    "rating": 4.5,
+    "review_count": 88,
+    "address": "전북 전주시 덕진구 명륜길 8",
+    "road_address": "전북 전주시 덕진구 명륜길 8",
+    "latitude": 35.8459,
+    "longitude": 127.1283,
+    "phone": "063-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.6km",
+    "reason": "전북대 앞에서 파스타와 피자를 함께 고를 수 있어 여럿이 저녁 먹기 좋습니다.",
+    "photos": [
+      {
+        "url": "/placeholders/western.jpg",
+        "alt": "전북대 리틀이탈리 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=35.8459&mlon=127.1283#map=17/35.8459/127.1283",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "전주",
+    "district": "덕진구"
+  },
+  {
+    "id": "jeonju_jbnu_western_004",
+    "name": "덕진 브런치앤파스타",
+    "region": "전주",
+    "area": "전북대",
+    "category": "양식",
+    "menu": [
+      "새우오일파스타",
+      "치킨스테이크"
+    ],
+    "menus": [
+      {
+        "name": "새우오일파스타",
+        "price": "9000",
+        "description": "전북대에서 즐기기 좋은 새우오일파스타 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "치킨스테이크",
+        "price": "11000",
+        "description": "전북대에서 즐기기 좋은 치킨스테이크 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "샐러드파스타",
+        "price": "13000",
+        "description": "전북대에서 즐기기 좋은 샐러드파스타 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "전북대",
+      "덕진",
+      "양식",
+      "파스타",
+      "브런치",
+      "가성비"
+    ],
+    "weather_match": [
+      "맑음",
+      "더움",
+      "흐림"
+    ],
+    "price_range": "9000-15000",
+    "rating": 4.2,
+    "review_count": 74,
+    "address": "전북 전주시 덕진구 권삼득로 50",
+    "road_address": "전북 전주시 덕진구 권삼득로 50",
+    "latitude": 35.8491,
+    "longitude": 127.1321,
+    "phone": "063-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.9km",
+    "reason": "전북대 생활권의 캐주얼 양식집으로 가벼운 파스타 메뉴와 합리적인 가격이 장점입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/western.jpg",
+        "alt": "덕진 브런치앤파스타 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=35.8491&mlon=127.1321#map=17/35.8491/127.1321",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "전주",
+    "district": "덕진구"
+  },
+  {
+    "id": "jeonju_gaeksa_western_013",
+    "name": "객사 라운드파스타",
+    "region": "전주",
+    "area": "객사",
+    "category": "양식",
+    "menu": [
+      "토마토파스타",
+      "치즈리조또"
+    ],
+    "menus": [
+      {
+        "name": "토마토파스타",
+        "price": "9000",
+        "description": "객사에서 즐기기 좋은 토마토파스타 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "치즈리조또",
+        "price": "11000",
+        "description": "객사에서 즐기기 좋은 치즈리조또 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "하우스와인",
+        "price": "13000",
+        "description": "객사에서 즐기기 좋은 하우스와인 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "객사",
+      "객리단길",
+      "양식",
+      "파스타",
+      "저녁",
+      "친구"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림"
+    ],
+    "price_range": "12000-17000",
+    "rating": 4.3,
+    "review_count": 79,
+    "address": "전북 전주시 완산구 전주객사2길 14",
+    "road_address": "전북 전주시 완산구 전주객사2길 14",
+    "latitude": 35.8196,
+    "longitude": 127.1432,
+    "phone": "063-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.4km",
+    "reason": "객사에서 친구와 저녁 먹기 좋은 캐주얼 파스타 식당입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/western.jpg",
+        "alt": "객사 라운드파스타 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=35.8196&mlon=127.1432#map=17/35.8196/127.1432",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "전주",
+    "district": "완산구"
+  },
+  {
+    "id": "jeonju_gaeksa_cafe_014",
+    "name": "객리단길 디저트룸",
+    "region": "전주",
+    "area": "객사",
+    "category": "카페",
+    "menu": [
+      "딸기케이크",
+      "아메리카노"
+    ],
+    "menus": [
+      {
+        "name": "딸기케이크",
+        "price": "9000",
+        "description": "객사에서 즐기기 좋은 딸기케이크 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "아메리카노",
+        "price": "11000",
+        "description": "객사에서 즐기기 좋은 아메리카노 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "브런치플레이트",
+        "price": "13000",
+        "description": "객사에서 즐기기 좋은 브런치플레이트 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "객사",
+      "객리단길",
+      "카페",
+      "디저트",
+      "친구"
+    ],
+    "weather_match": [
+      "맑음",
+      "더움",
+      "흐림"
+    ],
+    "price_range": "6000-14000",
+    "rating": 4.4,
+    "review_count": 113,
+    "address": "전북 전주시 완산구 객리단길 22",
+    "road_address": "전북 전주시 완산구 객리단길 22",
+    "latitude": 35.8192,
+    "longitude": 127.1422,
+    "phone": "063-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.3km",
+    "reason": "객리단길에서 식사 후 디저트까지 이어가기 좋은 카페입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/cafe.jpg",
+        "alt": "객리단길 디저트룸 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=35.8192&mlon=127.1422#map=17/35.8192/127.1422",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "전주",
+    "district": "완산구"
+  },
+  {
+    "id": "jeonju_hanok_cafe_015",
+    "name": "한옥마을 다온카페",
+    "region": "전주",
+    "area": "한옥마을",
+    "category": "카페",
+    "menu": [
+      "수제인절미라떼",
+      "한옥브런치"
+    ],
+    "menus": [
+      {
+        "name": "수제인절미라떼",
+        "price": "9000",
+        "description": "한옥마을에서 즐기기 좋은 수제인절미라떼 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "한옥브런치",
+        "price": "11000",
+        "description": "한옥마을에서 즐기기 좋은 한옥브런치 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "말차케이크",
+        "price": "13000",
+        "description": "한옥마을에서 즐기기 좋은 말차케이크 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "한옥마을",
+      "카페",
+      "디저트",
+      "브런치"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림",
+      "더움"
+    ],
+    "price_range": "6000-15000",
+    "rating": 4.2,
+    "review_count": 86,
+    "address": "전북 전주시 완산구 한옥마을길 30",
+    "road_address": "전북 전주시 완산구 한옥마을길 30",
+    "latitude": 35.8145,
+    "longitude": 127.1533,
+    "phone": "063-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.5km",
+    "reason": "한옥마을 산책과 함께 즐기기 좋은 디저트 카페입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/cafe.jpg",
+        "alt": "한옥마을 다온카페 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=35.8145&mlon=127.1533#map=17/35.8145/127.1533",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "전주",
+    "district": "완산구"
+  },
+  {
+    "id": "jeonju_hanok_korean_016",
+    "name": "한옥마을 담백한상",
+    "region": "전주",
+    "area": "한옥마을",
+    "category": "한식",
+    "menu": [
+      "전주비빔밥",
+      "떡갈비정식"
+    ],
+    "menus": [
+      {
+        "name": "전주비빔밥",
+        "price": "9000",
+        "description": "한옥마을에서 즐기기 좋은 전주비빔밥 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "떡갈비정식",
+        "price": "11000",
+        "description": "한옥마을에서 즐기기 좋은 떡갈비정식 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "콩나물국",
+        "price": "13000",
+        "description": "한옥마을에서 즐기기 좋은 콩나물국 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "한옥마을",
+      "한식",
+      "비빔밥",
+      "정식"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림",
+      "비"
+    ],
+    "price_range": "10000-15000",
+    "rating": 4.1,
+    "review_count": 95,
+    "address": "전북 전주시 완산구 은행로 44",
+    "road_address": "전북 전주시 완산구 은행로 44",
+    "latitude": 35.8157,
+    "longitude": 127.1525,
+    "phone": "063-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.4km",
+    "reason": "한옥마을에서 전주식 한상을 부담 없는 가격에 먹기 좋습니다.",
+    "photos": [
+      {
+        "url": "/placeholders/korean.jpg",
+        "alt": "한옥마을 담백한상 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=35.8157&mlon=127.1525#map=17/35.8157/127.1525",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "전주",
+    "district": "완산구"
+  },
+  {
+    "id": "seoul_hongdae_sushi_001",
+    "name": "홍대 스시정원",
+    "region": "서울",
+    "area": "홍대",
+    "category": "일식",
+    "menu": [
+      "모둠초밥",
+      "연어초밥"
+    ],
+    "menus": [
+      {
+        "name": "모둠초밥",
+        "price": "9000",
+        "description": "홍대에서 즐기기 좋은 모둠초밥 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "연어초밥",
+        "price": "11000",
+        "description": "홍대에서 즐기기 좋은 연어초밥 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "우동세트",
+        "price": "13000",
+        "description": "홍대에서 즐기기 좋은 우동세트 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "홍대",
+      "초밥",
+      "스시",
+      "일식",
+      "리뷰좋은곳"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림"
+    ],
+    "price_range": "12000-18000",
+    "rating": 4.5,
+    "review_count": 210,
+    "address": "서울 마포구 홍익로 18",
+    "road_address": "서울 마포구 홍익로 18",
+    "latitude": 37.5533,
+    "longitude": 126.9221,
+    "phone": "02-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.5km",
+    "reason": "홍대에서 리뷰가 많은 초밥집으로 신선한 모둠초밥 구성이 좋습니다.",
+    "photos": [
+      {
+        "url": "/placeholders/japanese.jpg",
+        "alt": "홍대 스시정원 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=37.5533&mlon=126.9221#map=17/37.5533/126.9221",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "서울",
+    "district": "마포구"
+  },
+  {
+    "id": "seoul_hongdae_sushi_002",
+    "name": "홍대입구 스시바다",
+    "region": "서울",
+    "area": "홍대",
+    "category": "일식",
+    "menu": [
+      "광어초밥",
+      "참치초밥"
+    ],
+    "menus": [
+      {
+        "name": "광어초밥",
+        "price": "9000",
+        "description": "홍대에서 즐기기 좋은 광어초밥 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "참치초밥",
+        "price": "11000",
+        "description": "홍대에서 즐기기 좋은 참치초밥 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "초밥정식",
+        "price": "13000",
+        "description": "홍대에서 즐기기 좋은 초밥정식 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "홍대",
+      "홍대입구",
+      "초밥",
+      "스시",
+      "일식"
+    ],
+    "weather_match": [
+      "맑음",
+      "비",
+      "흐림"
+    ],
+    "price_range": "13000-19000",
+    "rating": 4.3,
+    "review_count": 154,
+    "address": "서울 마포구 양화로 161",
+    "road_address": "서울 마포구 양화로 161",
+    "latitude": 37.5572,
+    "longitude": 126.9254,
+    "phone": "02-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.6km",
+    "reason": "홍대입구 근처에서 초밥 정식을 먹기 좋은 일식 후보입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/japanese.jpg",
+        "alt": "홍대입구 스시바다 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=37.5572&mlon=126.9254#map=17/37.5572/126.9254",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "서울",
+    "district": "마포구"
+  },
+  {
+    "id": "seoul_hongdae_pasta_003",
+    "name": "홍대 파스타무드",
+    "region": "서울",
+    "area": "홍대",
+    "category": "양식",
+    "menu": [
+      "라구파스타",
+      "크림파스타"
+    ],
+    "menus": [
+      {
+        "name": "라구파스타",
+        "price": "9000",
+        "description": "홍대에서 즐기기 좋은 라구파스타 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "크림파스타",
+        "price": "11000",
+        "description": "홍대에서 즐기기 좋은 크림파스타 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "리조또",
+        "price": "13000",
+        "description": "홍대에서 즐기기 좋은 리조또 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "홍대",
+      "파스타",
+      "양식",
+      "데이트"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림"
+    ],
+    "price_range": "12000-18000",
+    "rating": 4.4,
+    "review_count": 128,
+    "address": "서울 마포구 와우산로 29",
+    "road_address": "서울 마포구 와우산로 29",
+    "latitude": 37.5509,
+    "longitude": 126.9218,
+    "phone": "02-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.4km",
+    "reason": "홍대에서 파스타와 리조또를 고르기 좋은 캐주얼 양식집입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/western.jpg",
+        "alt": "홍대 파스타무드 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=37.5509&mlon=126.9218#map=17/37.5509/126.9218",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "서울",
+    "district": "마포구"
+  },
+  {
+    "id": "seoul_hongdae_pasta_004",
+    "name": "연남 오일파스타",
+    "region": "서울",
+    "area": "홍대",
+    "category": "양식",
+    "menu": [
+      "오일파스타",
+      "토마토파스타"
+    ],
+    "menus": [
+      {
+        "name": "오일파스타",
+        "price": "9000",
+        "description": "홍대에서 즐기기 좋은 오일파스타 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "토마토파스타",
+        "price": "11000",
+        "description": "홍대에서 즐기기 좋은 토마토파스타 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "샐러드",
+        "price": "13000",
+        "description": "홍대에서 즐기기 좋은 샐러드 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "홍대",
+      "연남",
+      "파스타",
+      "양식"
+    ],
+    "weather_match": [
+      "맑음",
+      "더움",
+      "흐림"
+    ],
+    "price_range": "11000-17000",
+    "rating": 4.2,
+    "review_count": 91,
+    "address": "서울 마포구 동교로 38길 10",
+    "road_address": "서울 마포구 동교로 38길 10",
+    "latitude": 37.5615,
+    "longitude": 126.9258,
+    "phone": "02-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.8km",
+    "reason": "홍대와 연남 사이에서 가볍게 파스타 먹기 좋은 곳입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/western.jpg",
+        "alt": "연남 오일파스타 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=37.5615&mlon=126.9258#map=17/37.5615/126.9258",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "서울",
+    "district": "마포구"
+  },
+  {
+    "id": "seoul_gangnam_pasta_001",
+    "name": "강남 파스타랩",
+    "region": "서울",
+    "area": "강남",
+    "category": "양식",
+    "menu": [
+      "쉬림프파스타",
+      "트러플리조또"
+    ],
+    "menus": [
+      {
+        "name": "쉬림프파스타",
+        "price": "9000",
+        "description": "강남에서 즐기기 좋은 쉬림프파스타 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "트러플리조또",
+        "price": "11000",
+        "description": "강남에서 즐기기 좋은 트러플리조또 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "스테이크샐러드",
+        "price": "13000",
+        "description": "강남에서 즐기기 좋은 스테이크샐러드 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "강남",
+      "파스타",
+      "양식",
+      "저녁"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림"
+    ],
+    "price_range": "14000-22000",
+    "rating": 4.4,
+    "review_count": 180,
+    "address": "서울 강남구 강남대로 100길 12",
+    "road_address": "서울 강남구 강남대로 100길 12",
+    "latitude": 37.4981,
+    "longitude": 127.0276,
+    "phone": "02-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.4km",
+    "reason": "강남역 근처에서 파스타 중심으로 저녁 먹기 좋은 양식집입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/western.jpg",
+        "alt": "강남 파스타랩 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=37.4981&mlon=127.0276#map=17/37.4981/127.0276",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "서울",
+    "district": "강남구"
+  },
+  {
+    "id": "seoul_gangnam_pasta_002",
+    "name": "역삼 이탈리안테이블",
+    "region": "서울",
+    "area": "강남",
+    "category": "양식",
+    "menu": [
+      "토마토파스타",
+      "버섯리조또"
+    ],
+    "menus": [
+      {
+        "name": "토마토파스타",
+        "price": "9000",
+        "description": "강남에서 즐기기 좋은 토마토파스타 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "버섯리조또",
+        "price": "11000",
+        "description": "강남에서 즐기기 좋은 버섯리조또 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "마르게리타피자",
+        "price": "13000",
+        "description": "강남에서 즐기기 좋은 마르게리타피자 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "강남",
+      "역삼",
+      "파스타",
+      "양식"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림",
+      "비"
+    ],
+    "price_range": "13000-20000",
+    "rating": 4.3,
+    "review_count": 142,
+    "address": "서울 강남구 테헤란로 20길 18",
+    "road_address": "서울 강남구 테헤란로 20길 18",
+    "latitude": 37.5004,
+    "longitude": 127.0364,
+    "phone": "02-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.9km",
+    "reason": "강남권에서 파스타와 피자를 함께 고르기 좋은 후보입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/western.jpg",
+        "alt": "역삼 이탈리안테이블 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=37.5004&mlon=127.0364#map=17/37.5004/127.0364",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "서울",
+    "district": "강남구"
+  },
+  {
+    "id": "seoul_seongsu_cafe_001",
+    "name": "성수 디저트스튜디오",
+    "region": "서울",
+    "area": "성수",
+    "category": "카페",
+    "menu": [
+      "바스크치즈케이크",
+      "아메리카노"
+    ],
+    "menus": [
+      {
+        "name": "바스크치즈케이크",
+        "price": "9000",
+        "description": "성수에서 즐기기 좋은 바스크치즈케이크 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "아메리카노",
+        "price": "11000",
+        "description": "성수에서 즐기기 좋은 아메리카노 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "크림라떼",
+        "price": "13000",
+        "description": "성수에서 즐기기 좋은 크림라떼 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "성수",
+      "카페",
+      "디저트",
+      "커피"
+    ],
+    "weather_match": [
+      "맑음",
+      "더움",
+      "흐림"
+    ],
+    "price_range": "6000-13000",
+    "rating": 4.5,
+    "review_count": 224,
+    "address": "서울 성동구 연무장길 20",
+    "road_address": "서울 성동구 연무장길 20",
+    "latitude": 37.5431,
+    "longitude": 127.0545,
+    "phone": "02-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.4km",
+    "reason": "성수에서 디저트와 커피를 즐기기 좋은 카페입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/cafe.jpg",
+        "alt": "성수 디저트스튜디오 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=37.5431&mlon=127.0545#map=17/37.5431/127.0545",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "서울",
+    "district": "성동구"
+  },
+  {
+    "id": "seoul_seongsu_cafe_002",
+    "name": "성수 브런치카페 모아",
+    "region": "서울",
+    "area": "성수",
+    "category": "카페",
+    "menu": [
+      "프렌치토스트",
+      "브런치플레이트"
+    ],
+    "menus": [
+      {
+        "name": "프렌치토스트",
+        "price": "9000",
+        "description": "성수에서 즐기기 좋은 프렌치토스트 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "브런치플레이트",
+        "price": "11000",
+        "description": "성수에서 즐기기 좋은 브런치플레이트 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "라떼",
+        "price": "13000",
+        "description": "성수에서 즐기기 좋은 라떼 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "성수",
+      "카페",
+      "브런치",
+      "디저트"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림"
+    ],
+    "price_range": "9000-16000",
+    "rating": 4.2,
+    "review_count": 118,
+    "address": "서울 성동구 성수이로 71",
+    "road_address": "서울 성동구 성수이로 71",
+    "latitude": 37.5419,
+    "longitude": 127.0567,
+    "phone": "02-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.6km",
+    "reason": "성수에서 브런치와 디저트를 함께 먹기 좋은 카페입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/cafe.jpg",
+        "alt": "성수 브런치카페 모아 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=37.5419&mlon=127.0567#map=17/37.5419/127.0567",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "서울",
+    "district": "성동구"
+  },
+  {
+    "id": "busan_haeundae_cafe_001",
+    "name": "해운대 오션디저트",
+    "region": "부산",
+    "area": "해운대",
+    "category": "카페",
+    "menu": [
+      "망고케이크",
+      "아이스라떼"
+    ],
+    "menus": [
+      {
+        "name": "망고케이크",
+        "price": "9000",
+        "description": "해운대에서 즐기기 좋은 망고케이크 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "아이스라떼",
+        "price": "11000",
+        "description": "해운대에서 즐기기 좋은 아이스라떼 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "크로플",
+        "price": "13000",
+        "description": "해운대에서 즐기기 좋은 크로플 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "해운대",
+      "카페",
+      "디저트",
+      "오션뷰"
+    ],
+    "weather_match": [
+      "맑음",
+      "더움",
+      "흐림"
+    ],
+    "price_range": "7000-15000",
+    "rating": 4.4,
+    "review_count": 173,
+    "address": "부산 해운대구 해운대해변로 270",
+    "road_address": "부산 해운대구 해운대해변로 270",
+    "latitude": 35.1587,
+    "longitude": 129.1603,
+    "phone": "051-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.3km",
+    "reason": "해운대에서 디저트와 커피를 즐기기 좋은 카페 후보입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/cafe.jpg",
+        "alt": "해운대 오션디저트 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=35.1587&mlon=129.1603#map=17/35.1587/129.1603",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "부산",
+    "district": "해운대구"
+  },
+  {
+    "id": "busan_haeundae_cafe_002",
+    "name": "해운대 브런치웨이브",
+    "region": "부산",
+    "area": "해운대",
+    "category": "카페",
+    "menu": [
+      "브런치플레이트",
+      "티라미수"
+    ],
+    "menus": [
+      {
+        "name": "브런치플레이트",
+        "price": "9000",
+        "description": "해운대에서 즐기기 좋은 브런치플레이트 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "티라미수",
+        "price": "11000",
+        "description": "해운대에서 즐기기 좋은 티라미수 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "아메리카노",
+        "price": "13000",
+        "description": "해운대에서 즐기기 좋은 아메리카노 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "해운대",
+      "카페",
+      "브런치",
+      "디저트"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림"
+    ],
+    "price_range": "9000-16000",
+    "rating": 4.2,
+    "review_count": 102,
+    "address": "부산 해운대구 구남로 29",
+    "road_address": "부산 해운대구 구남로 29",
+    "latitude": 35.1621,
+    "longitude": 129.1627,
+    "phone": "051-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.5km",
+    "reason": "해운대 중심가에서 브런치와 디저트를 먹기 좋습니다.",
+    "photos": [
+      {
+        "url": "/placeholders/cafe.jpg",
+        "alt": "해운대 브런치웨이브 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=35.1621&mlon=129.1627#map=17/35.1621/129.1627",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "부산",
+    "district": "해운대구"
+  },
+  {
+    "id": "busan_haeundae_japanese_001",
+    "name": "해운대 스시마루",
+    "region": "부산",
+    "area": "해운대",
+    "category": "일식",
+    "menu": [
+      "모둠초밥",
+      "광어회"
+    ],
+    "menus": [
+      {
+        "name": "모둠초밥",
+        "price": "9000",
+        "description": "해운대에서 즐기기 좋은 모둠초밥 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "광어회",
+        "price": "11000",
+        "description": "해운대에서 즐기기 좋은 광어회 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "미니우동",
+        "price": "13000",
+        "description": "해운대에서 즐기기 좋은 미니우동 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "해운대",
+      "초밥",
+      "회",
+      "일식"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림",
+      "비"
+    ],
+    "price_range": "13000-22000",
+    "rating": 4.3,
+    "review_count": 138,
+    "address": "부산 해운대구 중동1로 17",
+    "road_address": "부산 해운대구 중동1로 17",
+    "latitude": 35.1628,
+    "longitude": 129.1637,
+    "phone": "051-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.7km",
+    "reason": "해운대에서 초밥과 회를 함께 고르기 좋은 일식집입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/japanese.jpg",
+        "alt": "해운대 스시마루 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=35.1628&mlon=129.1637#map=17/35.1628/129.1637",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "부산",
+    "district": "해운대구"
+  },
+  {
+    "id": "busan_haeundae_japanese_002",
+    "name": "해운대 바다회초밥",
+    "region": "부산",
+    "area": "해운대",
+    "category": "일식",
+    "menu": [
+      "회덮밥",
+      "연어초밥"
+    ],
+    "menus": [
+      {
+        "name": "회덮밥",
+        "price": "9000",
+        "description": "해운대에서 즐기기 좋은 회덮밥 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "연어초밥",
+        "price": "11000",
+        "description": "해운대에서 즐기기 좋은 연어초밥 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "광어초밥",
+        "price": "13000",
+        "description": "해운대에서 즐기기 좋은 광어초밥 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "해운대",
+      "회",
+      "초밥",
+      "일식"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림"
+    ],
+    "price_range": "12000-20000",
+    "rating": 4.1,
+    "review_count": 87,
+    "address": "부산 해운대구 달맞이길 22",
+    "road_address": "부산 해운대구 달맞이길 22",
+    "latitude": 35.1579,
+    "longitude": 129.1723,
+    "phone": "051-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "1.2km",
+    "reason": "해운대 바다 근처에서 일식과 초밥을 먹기 좋은 후보입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/japanese.jpg",
+        "alt": "해운대 바다회초밥 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=35.1579&mlon=129.1723#map=17/35.1579/129.1723",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "부산",
+    "district": "해운대구"
+  },
+  {
+    "id": "seoul_hongdae_sushi_003",
+    "name": "홍대 초밥테이블",
+    "region": "서울",
+    "area": "홍대",
+    "category": "일식",
+    "menu": [
+      "특선초밥",
+      "연어아보카도초밥"
+    ],
+    "menus": [
+      {
+        "name": "특선초밥",
+        "price": "9000",
+        "description": "홍대에서 즐기기 좋은 특선초밥 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "연어아보카도초밥",
+        "price": "11000",
+        "description": "홍대에서 즐기기 좋은 연어아보카도초밥 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "미니소바",
+        "price": "13000",
+        "description": "홍대에서 즐기기 좋은 미니소바 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "홍대",
+      "초밥",
+      "스시",
+      "일식",
+      "리뷰좋은곳"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림",
+      "비"
+    ],
+    "price_range": "12000-17000",
+    "rating": 4.2,
+    "review_count": 82,
+    "address": "서울 마포구 어울마당로 55",
+    "road_address": "서울 마포구 어울마당로 55",
+    "latitude": 37.5522,
+    "longitude": 126.9212,
+    "phone": "02-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.8km",
+    "reason": "홍대 중심가에서 리뷰 조건을 만족하는 초밥 중심 일식 후보입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/japanese.jpg",
+        "alt": "홍대 초밥테이블 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=37.5522&mlon=126.9212#map=17/37.5522/126.9212",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "서울",
+    "district": "마포구"
+  },
+  {
+    "id": "busan_haeundae_cafe_003",
+    "name": "해운대 디저트하버",
+    "region": "부산",
+    "area": "해운대",
+    "category": "카페",
+    "menu": [
+      "수플레팬케이크",
+      "초코케이크"
+    ],
+    "menus": [
+      {
+        "name": "수플레팬케이크",
+        "price": "9000",
+        "description": "해운대에서 즐기기 좋은 수플레팬케이크 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "초코케이크",
+        "price": "11000",
+        "description": "해운대에서 즐기기 좋은 초코케이크 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "바닐라라떼",
+        "price": "13000",
+        "description": "해운대에서 즐기기 좋은 바닐라라떼 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "해운대",
+      "카페",
+      "디저트",
+      "커피"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림",
+      "비"
+    ],
+    "price_range": "8000-15000",
+    "rating": 4.3,
+    "review_count": 91,
+    "address": "부산 해운대구 우동1로 21",
+    "road_address": "부산 해운대구 우동1로 21",
+    "latitude": 35.1631,
+    "longitude": 129.1618,
+    "phone": "051-000-0000",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "0.8km",
+    "reason": "해운대에서 디저트 메뉴가 뚜렷한 카페 후보입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/cafe.jpg",
+        "alt": "해운대 디저트하버 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=35.1631&mlon=129.1618#map=17/35.1631/129.1618",
+    "place_url": "",
+    "source": "fallback_sample",
+    "city": "부산",
+    "district": "해운대구"
+  },
+  {
+    "id": "daejeon_guam_pasta_001",
+    "name": "구암역 파스타하우스",
+    "region": "대전",
+    "city": "대전",
+    "district": "유성구",
+    "area": "구암역",
+    "category": "양식",
+    "menu": [
+      "토마토파스타",
+      "크림파스타"
+    ],
+    "menus": [
+      {
+        "name": "토마토파스타",
+        "price": "9000",
+        "description": "구암역에서 즐기기 좋은 토마토파스타 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "크림파스타",
+        "price": "11000",
+        "description": "구암역에서 즐기기 좋은 크림파스타 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "리조또",
+        "price": "13000",
+        "description": "구암역에서 즐기기 좋은 리조또 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "대전",
+      "유성구",
+      "구암역",
+      "파스타",
+      "양식",
+      "가성비"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림",
+      "비",
+      "추움",
+      "더움"
+    ],
+    "price_range": "10000-15000",
+    "rating": 4.4,
+    "review_count": 86,
+    "address": "대전 유성구 구암역로 12",
+    "road_address": "대전 유성구 구암역로 12",
+    "latitude": 36.3567,
+    "longitude": 127.3311,
+    "phone": "042-000-0001",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "거리 정보 없음",
+    "reason": "대전 구암역 근처에서 파스타를 부담 없이 먹기 좋은 양식 후보입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/western.jpg",
+        "alt": "구암역 파스타하우스 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=36.3567&mlon=127.3311#map=17/36.3567/127.3311",
+    "place_url": "",
+    "source": "fallback_sample"
+  },
+  {
+    "id": "daejeon_guam_pasta_002",
+    "name": "유성 구암 이탈리",
+    "region": "대전",
+    "city": "대전",
+    "district": "유성구",
+    "area": "구암역",
+    "category": "양식",
+    "menu": [
+      "봉골레파스타",
+      "베이컨크림파스타"
+    ],
+    "menus": [
+      {
+        "name": "봉골레파스타",
+        "price": "9000",
+        "description": "구암역에서 즐기기 좋은 봉골레파스타 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "베이컨크림파스타",
+        "price": "11000",
+        "description": "구암역에서 즐기기 좋은 베이컨크림파스타 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "마르게리타피자",
+        "price": "13000",
+        "description": "구암역에서 즐기기 좋은 마르게리타피자 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "대전",
+      "유성구",
+      "구암역",
+      "파스타",
+      "이탈리안"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림",
+      "비",
+      "추움",
+      "더움"
+    ],
+    "price_range": "11000-16000",
+    "rating": 4.3,
+    "review_count": 73,
+    "address": "대전 유성구 계룡로 33",
+    "road_address": "대전 유성구 계룡로 33",
+    "latitude": 36.3573,
+    "longitude": 127.3298,
+    "phone": "042-000-0002",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "거리 정보 없음",
+    "reason": "구암역 생활권에서 파스타와 피자를 함께 고르기 좋은 곳입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/western.jpg",
+        "alt": "유성 구암 이탈리 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=36.3573&mlon=127.3298#map=17/36.3573/127.3298",
+    "place_url": "",
+    "source": "fallback_sample"
+  },
+  {
+    "id": "daejeon_guam_pasta_003",
+    "name": "구암역 브런치앤파스타",
+    "region": "대전",
+    "city": "대전",
+    "district": "유성구",
+    "area": "구암역",
+    "category": "양식",
+    "menu": [
+      "새우오일파스타",
+      "샐러드파스타"
+    ],
+    "menus": [
+      {
+        "name": "새우오일파스타",
+        "price": "9000",
+        "description": "구암역에서 즐기기 좋은 새우오일파스타 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "샐러드파스타",
+        "price": "11000",
+        "description": "구암역에서 즐기기 좋은 샐러드파스타 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "치킨스테이크",
+        "price": "13000",
+        "description": "구암역에서 즐기기 좋은 치킨스테이크 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "대전",
+      "유성구",
+      "구암역",
+      "파스타",
+      "브런치",
+      "양식"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림",
+      "비",
+      "추움",
+      "더움"
+    ],
+    "price_range": "9000-15000",
+    "rating": 4.2,
+    "review_count": 58,
+    "address": "대전 유성구 월드컵대로 5",
+    "road_address": "대전 유성구 월드컵대로 5",
+    "latitude": 36.3559,
+    "longitude": 127.3302,
+    "phone": "042-000-0003",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "거리 정보 없음",
+    "reason": "구암역에서 가볍게 파스타를 먹기 좋은 캐주얼 양식집입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/western.jpg",
+        "alt": "구암역 브런치앤파스타 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=36.3559&mlon=127.3302#map=17/36.3559/127.3302",
+    "place_url": "",
+    "source": "fallback_sample"
+  },
+  {
+    "id": "jeju_aewol_pasta_001",
+    "name": "애월 바다파스타",
+    "region": "제주",
+    "city": "제주",
+    "district": "제주시",
+    "area": "애월",
+    "category": "양식",
+    "menu": [
+      "해산물파스타",
+      "토마토파스타"
+    ],
+    "menus": [
+      {
+        "name": "해산물파스타",
+        "price": "9000",
+        "description": "애월에서 즐기기 좋은 해산물파스타 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "토마토파스타",
+        "price": "11000",
+        "description": "애월에서 즐기기 좋은 토마토파스타 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "리조또",
+        "price": "13000",
+        "description": "애월에서 즐기기 좋은 리조또 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "제주",
+      "애월",
+      "파스타",
+      "양식",
+      "바다"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림",
+      "비",
+      "추움",
+      "더움"
+    ],
+    "price_range": "13000-19000",
+    "rating": 4.4,
+    "review_count": 91,
+    "address": "제주 제주시 애월읍 애월해안로 20",
+    "road_address": "제주 제주시 애월읍 애월해안로 20",
+    "latitude": 33.4629,
+    "longitude": 126.3095,
+    "phone": "064-000-0001",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "거리 정보 없음",
+    "reason": "제주 애월에서 파스타를 찾는 요청에 맞는 fallback_sample 양식 후보입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/western.jpg",
+        "alt": "애월 바다파스타 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=33.4629&mlon=126.3095#map=17/33.4629/126.3095",
+    "place_url": "",
+    "source": "fallback_sample"
+  },
+  {
+    "id": "jeju_aewol_cafe_001",
+    "name": "애월 디저트바다",
+    "region": "제주",
+    "city": "제주",
+    "district": "제주시",
+    "area": "애월",
+    "category": "카페",
+    "menu": [
+      "당근케이크",
+      "아메리카노"
+    ],
+    "menus": [
+      {
+        "name": "당근케이크",
+        "price": "9000",
+        "description": "애월에서 즐기기 좋은 당근케이크 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "아메리카노",
+        "price": "11000",
+        "description": "애월에서 즐기기 좋은 아메리카노 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "크로플",
+        "price": "13000",
+        "description": "애월에서 즐기기 좋은 크로플 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "제주",
+      "애월",
+      "카페",
+      "디저트"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림",
+      "비",
+      "추움",
+      "더움"
+    ],
+    "price_range": "7000-15000",
+    "rating": 4.3,
+    "review_count": 76,
+    "address": "제주 제주시 애월읍 애월로 31",
+    "road_address": "제주 제주시 애월읍 애월로 31",
+    "latitude": 33.4634,
+    "longitude": 126.3102,
+    "phone": "064-000-0002",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "거리 정보 없음",
+    "reason": "제주 애월에서 카페와 디저트를 찾을 때 사용할 수 있는 샘플 후보입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/cafe.jpg",
+        "alt": "애월 디저트바다 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=33.4634&mlon=126.3102#map=17/33.4634/126.3102",
+    "place_url": "",
+    "source": "fallback_sample"
+  },
+  {
+    "id": "daegu_dongseongro_pasta_001",
+    "name": "동성로 파스타랩",
+    "region": "대구",
+    "city": "대구",
+    "district": "중구",
+    "area": "동성로",
+    "category": "양식",
+    "menu": [
+      "라구파스타",
+      "크림파스타"
+    ],
+    "menus": [
+      {
+        "name": "라구파스타",
+        "price": "9000",
+        "description": "동성로에서 즐기기 좋은 라구파스타 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "크림파스타",
+        "price": "11000",
+        "description": "동성로에서 즐기기 좋은 크림파스타 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "리조또",
+        "price": "13000",
+        "description": "동성로에서 즐기기 좋은 리조또 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "대구",
+      "동성로",
+      "파스타",
+      "양식"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림",
+      "비",
+      "추움",
+      "더움"
+    ],
+    "price_range": "11000-17000",
+    "rating": 4.3,
+    "review_count": 88,
+    "address": "대구 중구 동성로 18",
+    "road_address": "대구 중구 동성로 18",
+    "latitude": 35.8692,
+    "longitude": 128.5953,
+    "phone": "053-000-0001",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "거리 정보 없음",
+    "reason": "대구 동성로 파스타 요청에 대응하는 샘플 양식집입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/western.jpg",
+        "alt": "동성로 파스타랩 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=35.8692&mlon=128.5953#map=17/35.8692/128.5953",
+    "place_url": "",
+    "source": "fallback_sample"
+  },
+  {
+    "id": "gwangju_chungjang_cafe_001",
+    "name": "충장로 디저트스팟",
+    "region": "광주",
+    "city": "광주",
+    "district": "동구",
+    "area": "충장로",
+    "category": "카페",
+    "menu": [
+      "치즈케이크",
+      "라떼"
+    ],
+    "menus": [
+      {
+        "name": "치즈케이크",
+        "price": "9000",
+        "description": "충장로에서 즐기기 좋은 치즈케이크 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "라떼",
+        "price": "11000",
+        "description": "충장로에서 즐기기 좋은 라떼 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "크로플",
+        "price": "13000",
+        "description": "충장로에서 즐기기 좋은 크로플 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "광주",
+      "충장로",
+      "카페",
+      "디저트"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림",
+      "비",
+      "추움",
+      "더움"
+    ],
+    "price_range": "6000-14000",
+    "rating": 4.2,
+    "review_count": 66,
+    "address": "광주 동구 충장로 25",
+    "road_address": "광주 동구 충장로 25",
+    "latitude": 35.1489,
+    "longitude": 126.9136,
+    "phone": "062-000-0001",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "거리 정보 없음",
+    "reason": "광주 충장로 카페 요청에 대응하는 샘플 카페입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/cafe.jpg",
+        "alt": "충장로 디저트스팟 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=35.1489&mlon=126.9136#map=17/35.1489/126.9136",
+    "place_url": "",
+    "source": "fallback_sample"
+  },
+  {
+    "id": "incheon_songdo_pasta_001",
+    "name": "송도 파스타테이블",
+    "region": "인천",
+    "city": "인천",
+    "district": "연수구",
+    "area": "송도",
+    "category": "양식",
+    "menu": [
+      "토마토파스타",
+      "새우오일파스타"
+    ],
+    "menus": [
+      {
+        "name": "토마토파스타",
+        "price": "9000",
+        "description": "송도에서 즐기기 좋은 토마토파스타 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "새우오일파스타",
+        "price": "11000",
+        "description": "송도에서 즐기기 좋은 새우오일파스타 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "피자",
+        "price": "13000",
+        "description": "송도에서 즐기기 좋은 피자 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "인천",
+      "송도",
+      "파스타",
+      "양식"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림",
+      "비",
+      "추움",
+      "더움"
+    ],
+    "price_range": "12000-18000",
+    "rating": 4.4,
+    "review_count": 112,
+    "address": "인천 연수구 송도과학로 16",
+    "road_address": "인천 연수구 송도과학로 16",
+    "latitude": 37.3839,
+    "longitude": 126.6432,
+    "phone": "032-000-0001",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "거리 정보 없음",
+    "reason": "인천 송도 파스타 요청에 대응하는 샘플 양식 후보입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/western.jpg",
+        "alt": "송도 파스타테이블 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=37.3839&mlon=126.6432#map=17/37.3839/126.6432",
+    "place_url": "",
+    "source": "fallback_sample"
+  },
+  {
+    "id": "gyeonggi_suwon_sushi_001",
+    "name": "수원역 스시정",
+    "region": "경기",
+    "city": "수원",
+    "district": "팔달구",
+    "area": "수원",
+    "category": "일식",
+    "menu": [
+      "모둠초밥",
+      "연어초밥"
+    ],
+    "menus": [
+      {
+        "name": "모둠초밥",
+        "price": "9000",
+        "description": "수원에서 즐기기 좋은 모둠초밥 메뉴입니다.",
+        "is_recommended": true
+      },
+      {
+        "name": "연어초밥",
+        "price": "11000",
+        "description": "수원에서 즐기기 좋은 연어초밥 메뉴입니다.",
+        "is_recommended": false
+      },
+      {
+        "name": "우동세트",
+        "price": "13000",
+        "description": "수원에서 즐기기 좋은 우동세트 메뉴입니다.",
+        "is_recommended": false
+      }
+    ],
+    "tags": [
+      "경기",
+      "수원",
+      "수원역",
+      "초밥",
+      "일식"
+    ],
+    "weather_match": [
+      "맑음",
+      "흐림",
+      "비",
+      "추움",
+      "더움"
+    ],
+    "price_range": "12000-18000",
+    "rating": 4.3,
+    "review_count": 105,
+    "address": "경기 수원시 팔달구 덕영대로 924",
+    "road_address": "경기 수원시 팔달구 덕영대로 924",
+    "latitude": 37.2658,
+    "longitude": 127.0002,
+    "phone": "031-000-0001",
+    "opening_hours": "매일 11:00 - 21:30",
+    "distance": "거리 정보 없음",
+    "reason": "경기 수원역 초밥 요청에 대응하는 샘플 일식 후보입니다.",
+    "photos": [
+      {
+        "url": "/placeholders/japanese.jpg",
+        "alt": "수원역 스시정 기본 이미지",
+        "source": "fallback",
+        "is_fallback": true
+      }
+    ],
+    "map_url": "https://www.openstreetmap.org/?mlat=37.2658&mlon=127.0002#map=17/37.2658/127.0002",
+    "place_url": "",
+    "source": "fallback_sample"
+  }
+]
