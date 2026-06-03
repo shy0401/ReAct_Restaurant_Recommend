@@ -57,6 +57,12 @@ def get_weather(region: str) -> dict[str, Any]:
     mode = os.getenv("WEATHER_API_MODE", "fallback").lower()
     base = FALLBACK_WEATHER.get(region, random.choice(list(FALLBACK_WEATHER.values()))).copy()
     source = "fallback"
+    external_api = {
+        "provider": "open_meteo",
+        "status": "disabled" if mode != "open-meteo" else "not_called",
+        "fallback_used": "fallback_weather",
+        "message": "WEATHER_API_MODE가 open-meteo가 아니어서 fallback 날씨를 사용합니다.",
+    }
 
     if mode == "open-meteo" and region in REGION_COORDS:
         lat, lon = REGION_COORDS[region]
@@ -73,8 +79,20 @@ def get_weather(region: str) -> dict[str, Any]:
             code = int(current.get("weathercode", 0))
             base.update({"condition": _condition_from_code(code, temp), "temperature": temp})
             source = "open-meteo"
-        except Exception:
+            external_api = {
+                "provider": "open_meteo",
+                "status": "ok",
+                "fallback_used": None,
+                "message": "Open-Meteo 현재 날씨를 사용했습니다.",
+            }
+        except Exception as exc:
             source = "fallback_after_network_error"
+            external_api = {
+                "provider": "open_meteo",
+                "status": "failed",
+                "fallback_used": "fallback_weather",
+                "message": f"Open-Meteo 호출 실패로 fallback 날씨를 사용했습니다: {exc}",
+            }
 
     return {
         "region": region,
@@ -83,6 +101,8 @@ def get_weather(region: str) -> dict[str, Any]:
         "humidity": base["humidity"],
         "recommendation_hint": _hint(base["condition"]),
         "source": source,
+        "external_api": external_api,
+        "fallback_strategy": "날씨 API 실패 시 fallback 날씨를 보조 조건으로만 사용합니다.",
     }
 
 

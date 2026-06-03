@@ -42,11 +42,18 @@ def build_submission_trace_text(
             lines.append(f"   - 리뷰 수: {item.review_count or 0}")
             lines.append(f"   - 추천 이유: {item.reason}")
             lines.append(f"   - 조건 반영: {item.preference_relation}")
+        if len(result.final_recommendations) < result.input.top_k:
+            lines.append("")
+            lines.append(f"현재 조건으로는 {result.input.top_k}곳을 모두 채우지 못했습니다.")
+            lines.append("다른 지역으로 임의 대체하지 않았습니다.")
+            lines.append("가격 조건, 리뷰 수 조건 또는 세부 위치를 완화하면 더 찾을 수 있습니다.")
     elif parsed_conditions.needs_clarification:
         lines.append(parsed_conditions.clarification_reason or "추가 조건 확인이 필요합니다.")
         lines.append("지역을 확인할 수 없어 실제 맛집 추천을 중단했습니다.")
     else:
         lines.append("조건을 만족하는 후보가 부족해 실제 맛집 추천을 반환하지 않았습니다.")
+        lines.append("다른 지역으로 임의 대체하지 않았습니다.")
+        lines.append("가격 또는 리뷰 조건을 완화하면 더 찾을 수 있습니다.")
     if parsed_conditions.suggested_queries:
         lines.append("")
         lines.append("Suggested Queries:")

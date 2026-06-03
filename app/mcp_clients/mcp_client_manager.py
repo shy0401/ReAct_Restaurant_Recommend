@@ -56,8 +56,25 @@ class MCPClientManager:
                 return get_static_map(**arguments)
         except Exception as exc:
             logger.exception("MCP tool failed: %s.%s", server, tool)
-            return {"error": str(exc), "server": server, "tool": tool}
-        raise ValueError(f"Unknown MCP tool: {server}.{tool}")
+            return _tool_failure_observation(server, tool, str(exc))
+        return _tool_failure_observation(server, tool, f"Unknown MCP tool: {server}.{tool}")
 
     def status(self) -> dict[str, Any]:
         return {"servers": self.servers, "count": len(self.servers)}
+
+
+def _tool_failure_observation(server: str, tool: str, message: str) -> dict[str, Any]:
+    fallback_strategy = {
+        "weather": "날씨 API 실패 시 fallback 날씨 데이터로 추천을 계속합니다.",
+        "restaurant": "같은 지역 안에서 조건 완화 검색을 시도하고, 그래도 없으면 부족 안내를 반환합니다.",
+        "memory": "현재 요청의 어제/오늘 메뉴 입력값만 사용해 중복 회피를 계속합니다.",
+        "place": "장소 상세 API 실패 시 seed/fallback 상세 데이터와 기본 이미지를 사용합니다.",
+    }.get(server, "가능한 fallback 데이터로 계속 진행하고 실패 사실을 Trace에 남깁니다.")
+    return {
+        "error": "tool_call_failed",
+        "server": server,
+        "tool": tool,
+        "message": message,
+        "fallback_strategy": fallback_strategy,
+        "user_message": "일부 도구 호출에 실패했지만 가능한 fallback 전략으로 처리를 계속합니다.",
+    }

@@ -42,11 +42,14 @@ class FoodReActAgent:
             server, tool = action.split(".", 1)
             observation = await self.mcp.call_tool(server, tool, action_input)
         except Exception as exc:
+            server, tool = action.split(".", 1) if "." in action else ("agent", action)
             observation = {
                 "error": "tool_call_failed",
-                "action": action,
+                "server": server,
+                "tool": tool,
                 "message": str(exc),
                 "fallback_strategy": "가능한 경우 같은 지역 안에서만 조건을 완화해 다시 검색합니다.",
+                "user_message": "도구 호출 실패를 감지해 Trace에 남겼고 가능한 fallback 전략으로 계속 진행합니다.",
             }
             logger.exception("Tool call failed: %s", action)
         trace.append(ReActTraceStep(thought=thought, action=action, action_input=action_input, observation=observation))
@@ -200,6 +203,8 @@ class FoodReActAgent:
                     and detail.get("longitude", item.get("longitude")) is not None,
                     "map_provider": "kakao" if os.getenv("MAP_PROVIDER", "leaflet").lower() == "kakao" else "leaflet",
                     "source": detail.get("source", item.get("source", "fallback")),
+                    "fallback_messages": detail.get("fallback_messages", []),
+                    "user_message": "실제 장소 API가 실패하거나 사진/메뉴가 없으면 seed/fallback 상세 정보를 사용합니다.",
                 }
             merged = {
                 **item,
@@ -457,7 +462,14 @@ class FoodReActAgent:
                     thought="조건에 맞는 후보가 요청 개수보다 적어 다른 지역 후보로 채우지 않고 부족 사실을 명확히 남긴다.",
                     action="agent.shortage_notice",
                     action_input={"requested_top_k": top_k, "final_count": len(final), "region": request.region, "city": request.city, "area": request.area, "menu_keyword": request.menu_keyword, "food_type": request.food_type},
-                    observation={"warning": "not_enough_strict_candidates", "message": f"{request.region} {request.area or request.landmark or ''} {request.menu_keyword or request.food_type or ''} 조건을 만족하는 후보가 부족해 조건에 맞는 후보만 반환합니다."},
+                    observation={
+                        "warning": "no_search_results" if not final else "not_enough_strict_candidates",
+                        "legacy_warning": "not_enough_strict_candidates",
+                        "message": f"현재 조건으로는 {top_k}곳을 채우지 못했습니다.",
+                        "user_message": f"{request.region} {request.area or request.landmark or ''} {request.menu_keyword or request.food_type or ''} 조건을 만족하는 후보가 부족해 조건에 맞는 후보만 반환합니다.",
+                        "relaxation_options": ["가격 조건 완화", "리뷰 수 조건 완화", "세부 위치 확장"],
+                        "not_done": "다른 지역 후보로 임의 대체하지 않음",
+                    },
                 )
             )
 

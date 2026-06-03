@@ -6,6 +6,32 @@ from typing import Any
 import requests
 
 
+_LAST_SEARCH_STATUS: dict[str, Any] = {
+    "provider": "kakao_local",
+    "status": "not_called",
+    "message": "Kakao Local API search has not been called yet.",
+    "fallback_used": None,
+}
+
+
+def get_last_kakao_status() -> dict[str, Any]:
+    return dict(_LAST_SEARCH_STATUS)
+
+
+def _set_status(status: str, message: str, *, fallback_used: str | None = None, result_count: int | None = None) -> None:
+    _LAST_SEARCH_STATUS.clear()
+    _LAST_SEARCH_STATUS.update(
+        {
+            "provider": "kakao_local",
+            "status": status,
+            "message": message,
+            "fallback_used": fallback_used,
+        }
+    )
+    if result_count is not None:
+        _LAST_SEARCH_STATUS["result_count"] = result_count
+
+
 def search_kakao_places(
     *,
     query: str,
@@ -20,7 +46,11 @@ def search_kakao_places(
     size: int = 10,
 ) -> list[dict[str, Any]]:
     key = os.getenv("KAKAO_REST_API_KEY")
-    if not key or os.getenv("USE_REAL_PLACE_API", "false").lower() != "true":
+    if os.getenv("USE_REAL_PLACE_API", "false").lower() != "true":
+        _set_status("disabled", "USE_REAL_PLACE_API=false라 Kakao Local API를 호출하지 않았습니다.", fallback_used="fallback_sample")
+        return []
+    if not key:
+        _set_status("api_key_missing", "KAKAO_REST_API_KEY가 없어 Kakao Local API를 호출하지 않았습니다.", fallback_used="fallback_sample")
         return []
     params: dict[str, Any] = {"query": query, "category_group_code": "FD6", "size": min(size, 15)}
     if latitude is not None and longitude is not None:
@@ -33,13 +63,18 @@ def search_kakao_places(
             timeout=5,
         )
         response.raise_for_status()
-    except Exception:
+    except Exception as exc:
+        _set_status("failed", f"Kakao Local API 호출 실패: {exc}", fallback_used="fallback_sample")
         return []
     places = []
     for doc in response.json().get("documents", []):
         place = normalize_kakao_place(doc, region=region, city=city, food_type=food_type, menu_keyword=menu_keyword)
         if validate_place_region(place, requested_region=region, requested_city=city, requested_district=district, requested_area=area):
             places.append(place)
+    if places:
+        _set_status("ok", "Kakao Local API 검색 결과를 사용했습니다.", result_count=len(places))
+    else:
+        _set_status("no_valid_results", "Kakao Local API 결과가 없거나 요청 지역/음식 조건과 맞지 않았습니다.", fallback_used="fallback_sample", result_count=0)
     return places
 
 

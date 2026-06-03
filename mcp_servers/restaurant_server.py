@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any
 
 from app.services.geo_utils import format_distance, haversine_distance_km
-from app.services.kakao_local_service import build_kakao_query, search_kakao_places
+from app.services.kakao_local_service import build_kakao_query, get_last_kakao_status, search_kakao_places
 
 try:
     from mcp.server.fastmcp import FastMCP
@@ -172,6 +172,7 @@ def search_restaurants(
 ) -> list[dict[str, Any]]:
     requested_region = (region or "").strip() or "전주"
     warnings: list[str] = []
+    relaxed_fields: set[str] = set()
 
     query = build_kakao_query(requested_region, city, district, area or landmark, food_type, menu_keyword)
     api_items = search_kakao_places(
@@ -186,6 +187,7 @@ def search_restaurants(
         menu_keyword=menu_keyword,
         size=limit,
     )
+    api_status = get_last_kakao_status()
 
     all_items = [*api_items, *_load_restaurants()]
     region_items = [item for item in all_items if _region_matches(item, requested_region, city)]
@@ -194,13 +196,17 @@ def search_restaurants(
             {
                 "error": "region_not_found",
                 "message": f"{requested_region} 지역 후보가 없습니다. 다른 지역으로 대체하지 않았습니다.",
+                "fallback_strategy": "지역명을 확인하거나 실제 장소 API 키를 설정한 뒤 다시 검색합니다.",
+                "user_message": "요청 지역의 샘플/실제 후보가 없어 추천을 만들 수 없습니다.",
+                "not_done": "다른 지역 후보로 임의 대체하지 않음",
+                "external_api": api_status,
                 "requested_region": requested_region,
                 "requested_city": city,
             }
         ]
 
     if not api_items:
-        warnings.append("실제 장소 API 결과가 없거나 API 키가 없어 fallback_sample 데이터만 검색했습니다.")
+        warnings.append("외부 장소 API 실패 또는 미설정으로 fallback_sample 데이터셋을 사용했습니다.")
 
     def filter_items(
         *,
@@ -251,10 +257,20 @@ def search_restaurants(
         stage_items = filter_items(**options)
         if stage_name != "strict" and stage_items:
             if stage_name == "relax_price_review":
+                if max_price is not None:
+                    relaxed_fields.add("price")
+                if min_rating is not None:
+                    relaxed_fields.add("rating")
+                if min_review_count is not None:
+                    relaxed_fields.add("review_count")
                 warnings.append("가격/리뷰 조건만 완화했습니다. 지역, 세부 위치, 메뉴/음식 종류는 유지했습니다.")
             elif stage_name == "relax_area":
+                if area or landmark or district:
+                    relaxed_fields.add("area")
                 warnings.append(f"{area or landmark} 근처 후보가 부족해 같은 {city or requested_region} 지역 안에서만 확장했습니다.")
             elif stage_name == "relax_menu_to_food_type":
+                if menu_keyword:
+                    relaxed_fields.add("menu_keyword")
                 warnings.append(f"{menu_keyword} 후보가 부족해 같은 {city or requested_region} 지역의 {food_type} 후보까지만 확장했습니다.")
         for item in sorted(stage_items, key=lambda value: _sort_key(value, area, landmark, menu_keyword, max_price, latitude, longitude), reverse=True):
             item_id = item.get("id") or item.get("name")
@@ -267,8 +283,14 @@ def search_restaurants(
     if not results:
         return [
             {
-                "warning": "not_enough_strict_candidates",
-                "message": f"{requested_region} {area or landmark or ''} {menu_keyword or food_type or ''} 조건을 만족하는 후보가 부족합니다. 다른 지역 후보로 채우지 않았습니다.",
+                "warning": "no_search_results",
+                "legacy_warning": "not_enough_strict_candidates",
+                "message": "요청 조건에 맞는 후보가 없습니다.",
+                "relaxation_options": ["가격 조건 완화", "리뷰 수 조건 완화", "세부 위치 확장"],
+                "not_done": "다른 지역 후보로 임의 대체하지 않음",
+                "fallback_strategy": "지역과 메뉴/음식 종류는 유지하고 가격, 리뷰 수, 세부 위치 조건을 완화해 다시 시도할 수 있습니다.",
+                "user_message": f"{requested_region} {area or landmark or ''} {menu_keyword or food_type or ''} 조건을 만족하는 후보가 부족합니다.",
+                "external_api": api_status,
                 "requested_region": requested_region,
                 "requested_city": city,
                 "requested_district": district,
@@ -285,6 +307,10 @@ def search_restaurants(
             {
                 "warning": "relaxed_conditions",
                 "messages": list(dict.fromkeys(warnings)),
+                "relaxed_fields": sorted(relaxed_fields),
+                "not_done": "다른 지역 후보로 임의 대체하지 않음",
+                "external_api": api_status,
+                "fallback_used": api_status.get("fallback_used"),
                 "requested_region": requested_region,
                 "requested_city": city,
                 "requested_district": district,
