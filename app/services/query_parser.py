@@ -34,6 +34,14 @@ FOOD_RULES = [
     ("한식", None, ["한식"]),
 ]
 
+DEFAULT_SUGGESTED_QUERIES = [
+    "전주 객사 근처에서 가성비 좋은 맛집 3곳 추천해줘",
+    "서울 홍대 근처 초밥 리뷰 좋은 곳 추천해줘",
+    "대전 구암역 근처 파스타 맛집 추천해줘",
+]
+
+VAGUE_FOOD_KEYWORDS = ["아무거나", "맛있는 거", "맛있는거", "밥집", "맛집", "추천해줘", "추천"]
+
 
 def parse_recommendation_query(query: str) -> ParsedRecommendationConditions:
     text = (query or "").strip()
@@ -45,11 +53,31 @@ def parse_recommendation_query(query: str) -> ParsedRecommendationConditions:
     min_rating, min_review_count = _parse_review_condition(text)
     top_k = _parse_top_k(text)
     warnings = list(location.warnings)
+    needs_clarification = False
+    clarification_reason: str | None = None
+    error_code: str | None = None
+    suggested_queries: list[str] = []
 
     if "근처" in text and not location.area and not location.landmark:
         warnings.append("근처 표현은 있었지만 세부 위치를 찾지 못해 지역 전체에서 검색합니다.")
     if not purpose and ("맛집" in text or "추천" in text):
         warnings.append("방문 목적이 명확하지 않아 일반 식사 추천으로 처리합니다.")
+    if not location.region:
+        needs_clarification = True
+        error_code = "unknown_region"
+        clarification_reason = "지역을 해석하지 못했습니다. 추천을 시작하려면 지역이나 세부 위치를 알려주세요."
+        suggested_queries = DEFAULT_SUGGESTED_QUERIES
+        warnings.append("지역이 확인되지 않아 실제 맛집 추천을 중단하고 지역 확인을 요청합니다.")
+    elif _is_vague_food_request(text, food_type, menu_keyword):
+        clarification_reason = "음식 종류가 모호해 평점, 거리, 가격 중심으로 추천합니다."
+        warnings.append("음식 종류가 모호해 평점/거리/가격 중심으로 추천합니다. 한식, 파스타, 초밥, 카페처럼 음식 종류를 추가하면 정확도가 올라갑니다.")
+        suggested_queries = [
+            f"{location.area or location.city or location.region} 근처 파스타 가성비 좋은 곳 추천해줘",
+            f"{location.area or location.city or location.region} 근처 초밥 리뷰 좋은 곳 추천해줘",
+            f"{location.area or location.city or location.region} 근처 카페 디저트 추천해줘",
+        ]
+    if location.region and not any([food_type, menu_keyword, budget_level, min_rating, min_review_count, purpose, companion]):
+        warnings.append("지역 외 조건이 부족해 평점과 거리 중심으로 추천합니다. 음식 종류, 가격대, 동행, 목적을 추가하면 더 정확합니다.")
 
     preference_parts: list[str] = []
     if food_type:
@@ -68,7 +96,7 @@ def parse_recommendation_query(query: str) -> ParsedRecommendationConditions:
         preference_parts.append("지역 맛집")
 
     return ParsedRecommendationConditions(
-        region=location.region or "전주",
+        region=location.region or "미확인",
         city=location.city,
         district=location.district,
         area=location.area,
@@ -88,6 +116,10 @@ def parse_recommendation_query(query: str) -> ParsedRecommendationConditions:
         min_review_count=min_review_count,
         top_k=top_k,
         warnings=warnings,
+        needs_clarification=needs_clarification,
+        clarification_reason=clarification_reason,
+        error_code=error_code,
+        suggested_queries=suggested_queries,
     )
 
 
@@ -101,6 +133,13 @@ def _parse_food(text: str) -> tuple[str | None, str | None]:
         if any(keyword in compact for keyword in keywords):
             return food_type, menu_keyword
     return None, None
+
+
+def _is_vague_food_request(text: str, food_type: str | None, menu_keyword: str | None) -> bool:
+    if food_type or menu_keyword:
+        return False
+    compact = _compact(text)
+    return any(_compact(keyword) in compact for keyword in VAGUE_FOOD_KEYWORDS)
 
 
 def _parse_purpose(text: str) -> str | None:

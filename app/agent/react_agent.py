@@ -5,7 +5,7 @@ import os
 from typing import Any
 
 from app.agent.reflection import reflection_check
-from app.agent.schemas import RecommendationItem, RecommendationRequest, RecommendationResponse, ReActTraceStep
+from app.agent.schemas import ReflectionResult, RecommendationItem, RecommendationRequest, RecommendationResponse, ReActTraceStep
 from app.mcp_clients.mcp_client_manager import MCPClientManager
 from app.services.scoring import (
     MENU_KEYWORD_TO_TYPE,
@@ -42,11 +42,14 @@ class FoodReActAgent:
             server, tool = action.split(".", 1)
             observation = await self.mcp.call_tool(server, tool, action_input)
         except Exception as exc:
+            server, tool = action.split(".", 1) if "." in action else ("agent", action)
             observation = {
                 "error": "tool_call_failed",
-                "action": action,
+                "server": server,
+                "tool": tool,
                 "message": str(exc),
                 "fallback_strategy": "가능한 경우 같은 지역 안에서만 조건을 완화해 다시 검색합니다.",
+                "user_message": "도구 호출 실패를 감지해 Trace에 남겼고 가능한 fallback 전략으로 계속 진행합니다.",
             }
             logger.exception("Tool call failed: %s", action)
         trace.append(ReActTraceStep(thought=thought, action=action, action_input=action_input, observation=observation))
@@ -59,6 +62,8 @@ class FoodReActAgent:
             inferred = MENU_KEYWORD_TO_TYPE.get(request.menu_keyword)
             if inferred:
                 return inferred
+        if request.clarification_reason and "음식 종류가 모호" in request.clarification_reason:
+            return None
         if request.preference:
             for token in ["한식", "중식", "일식", "양식", "분식", "카페", "고기", "국물", "매운 음식"]:
                 if token in request.preference:
@@ -98,6 +103,8 @@ class FoodReActAgent:
                 area=request.area,
                 food_type=request.food_type,
                 menu_keyword=request.menu_keyword,
+                purpose=request.purpose,
+                companion=request.companion,
             )
             ranked.append(
                 enrich_recommendation(
@@ -125,6 +132,69 @@ class FoodReActAgent:
                 seen.add(item_id)
         return deduped
 
+    def _clarification_response(self, request: RecommendationRequest, trace: list[ReActTraceStep]) -> RecommendationResponse:
+        reason = request.clarification_reason or "추천을 시작하기 위해 추가 조건 확인이 필요합니다."
+        suggested_queries = request.suggested_queries or [
+            "전주 객사 근처에서 가성비 좋은 맛집 3곳 추천해줘",
+            "서울 홍대 근처 초밥 리뷰 좋은 곳 추천해줘",
+            "대전 구암역 근처 파스타 맛집 추천해줘",
+        ]
+        trace.append(
+            ReActTraceStep(
+                thought="지역이 확인되지 않아 다른 지역 후보로 대체하지 않고 사용자에게 확인을 요청한다.",
+                action="agent.request_clarification",
+                action_input={
+                    "query_region": request.region,
+                    "error_code": request.error_code,
+                    "needs_clarification": request.needs_clarification,
+                },
+                observation={
+                    "error": request.error_code or "clarification_required",
+                    "message": reason,
+                    "final_answer": "지역을 확인할 수 없어 실제 맛집 추천을 중단했습니다. 지역이나 세부 위치를 포함해 다시 입력해주세요.",
+                    "suggested_queries": suggested_queries,
+                },
+            )
+        )
+        reflection = ReflectionResult(
+            approved=False,
+            score=0,
+            issues=[reason],
+            checked_items=["지역 확인 필요", "다른 지역 후보로 대체하지 않음", "대안 쿼리 제시"],
+            improvement_instruction="지역명 또는 세부 위치가 포함된 자연어 요청을 다시 입력해야 합니다.",
+            summary="Reflection 0/10: 지역이 확인되지 않아 맛집 후보를 추천하지 않았습니다.",
+            final_changes=["전주 기본 추천으로 덮지 않고 clarification 응답을 반환했습니다."],
+        )
+        trace.append(
+            ReActTraceStep(
+                thought="지역 확인이 필요한 예외 상황이므로 최종 추천 대신 대안 쿼리를 확정한다.",
+                action="agent.finalize",
+                action_input={"requested_top_k": request.top_k, "final_count": 0, "error_code": request.error_code},
+                observation={
+                    "final_recommendations": [],
+                    "exception_alternative": reason,
+                    "suggested_queries": suggested_queries,
+                    "not_done": "지역을 확인할 수 없어 다른 지역 후보로 임의 대체하지 않음",
+                },
+            )
+        )
+        return RecommendationResponse(
+            input=request,
+            plan_steps=PLAN_STEPS,
+            weather={
+                "region": request.region,
+                "condition": None,
+                "temperature": None,
+                "humidity": None,
+                "recommendation_hint": "지역 확인 전에는 날씨 조회를 수행하지 않습니다.",
+                "source": "not_requested",
+            },
+            react_trace=trace,
+            draft_recommendations=[],
+            reflection=reflection,
+            final_recommendations=[],
+        )
+
     async def _attach_place_details(self, trace: list[ReActTraceStep], items: list[dict]) -> list[dict]:
         detailed_items = []
         for item in items:
@@ -148,6 +218,8 @@ class FoodReActAgent:
                     and detail.get("longitude", item.get("longitude")) is not None,
                     "map_provider": "kakao" if os.getenv("MAP_PROVIDER", "leaflet").lower() == "kakao" else "leaflet",
                     "source": detail.get("source", item.get("source", "fallback")),
+                    "fallback_messages": detail.get("fallback_messages", []),
+                    "user_message": "실제 장소 API가 실패하거나 사진/메뉴가 없으면 seed/fallback 상세 정보를 사용합니다.",
                 }
             merged = {
                 **item,
@@ -277,10 +349,35 @@ class FoodReActAgent:
                     "food_type": request.food_type,
                     "menu_keyword": request.menu_keyword,
                     "top_k": top_k,
+                    "needs_clarification": request.needs_clarification,
+                    "error_code": request.error_code,
                 },
                 observation=PLAN_STEPS,
             )
         )
+
+        if request.needs_clarification and request.error_code == "unknown_region":
+            return self._clarification_response(request, trace)
+
+        if request.warnings or request.clarification_reason:
+            trace.append(
+                ReActTraceStep(
+                    thought="입력 조건의 부족하거나 모호한 부분을 확인하고 추천 정확도 개선 안내를 Observation으로 남긴다.",
+                    action="agent.input_warning",
+                    action_input={
+                        "region": request.region,
+                        "food_type": request.food_type,
+                        "menu_keyword": request.menu_keyword,
+                        "preference": request.preference,
+                    },
+                    observation={
+                        "warnings": request.warnings,
+                        "clarification_reason": request.clarification_reason,
+                        "suggested_queries": request.suggested_queries,
+                        "continue_recommendation": True,
+                    },
+                )
+            )
 
         if request.weather:
             weather = {
@@ -342,6 +439,24 @@ class FoodReActAgent:
             purpose=request.purpose,
             companion=request.companion,
         )
+        trace.append(
+            ReActTraceStep(
+                thought="초안 추천이 지역, 세부 위치, 가격, 리뷰, 메뉴 중복, 지도/사진 조건을 만족하는지 Reflection으로 검토한다.",
+                action="reflection.check",
+                action_input={
+                    "draft_count": len(draft),
+                    "region": request.region,
+                    "city": request.city,
+                    "area": request.area,
+                    "food_type": request.food_type,
+                    "menu_keyword": request.menu_keyword,
+                    "max_price": request.max_price,
+                    "min_rating": request.min_rating,
+                    "min_review_count": request.min_review_count,
+                },
+                observation=reflection.model_dump(),
+            )
+        )
 
         final = draft
         if not reflection.approved:
@@ -373,6 +488,22 @@ class FoodReActAgent:
                 purpose=request.purpose,
                 companion=request.companion,
             )
+            trace.append(
+                ReActTraceStep(
+                    thought="재정렬된 추천 결과를 다시 Reflection으로 검토해 제출 가능한 최종 품질인지 확인한다.",
+                    action="reflection.check",
+                    action_input={
+                        "draft_count": len(final),
+                        "region": request.region,
+                        "city": request.city,
+                        "area": request.area,
+                        "food_type": request.food_type,
+                        "menu_keyword": request.menu_keyword,
+                        "reranked": True,
+                    },
+                    observation=reflection.model_dump(),
+                )
+            )
 
         if len(final) < top_k:
             trace.append(
@@ -380,7 +511,14 @@ class FoodReActAgent:
                     thought="조건에 맞는 후보가 요청 개수보다 적어 다른 지역 후보로 채우지 않고 부족 사실을 명확히 남긴다.",
                     action="agent.shortage_notice",
                     action_input={"requested_top_k": top_k, "final_count": len(final), "region": request.region, "city": request.city, "area": request.area, "menu_keyword": request.menu_keyword, "food_type": request.food_type},
-                    observation={"warning": "not_enough_strict_candidates", "message": f"{request.region} {request.area or request.landmark or ''} {request.menu_keyword or request.food_type or ''} 조건을 만족하는 후보가 부족해 조건에 맞는 후보만 반환합니다."},
+                    observation={
+                        "warning": "no_search_results" if not final else "not_enough_strict_candidates",
+                        "legacy_warning": "not_enough_strict_candidates",
+                        "message": f"현재 조건으로는 {top_k}곳을 채우지 못했습니다.",
+                        "user_message": f"{request.region} {request.area or request.landmark or ''} {request.menu_keyword or request.food_type or ''} 조건을 만족하는 후보가 부족해 조건에 맞는 후보만 반환합니다.",
+                        "relaxation_options": ["가격 조건 완화", "리뷰 수 조건 완화", "세부 위치 확장"],
+                        "not_done": "다른 지역 후보로 임의 대체하지 않음",
+                    },
                 )
             )
 
@@ -388,6 +526,34 @@ class FoodReActAgent:
             item["reflection_result"] = reflection.summary
         for item in draft:
             item["reflection_result"] = reflection.summary
+
+        trace.append(
+            ReActTraceStep(
+                thought="모든 도구 호출, 후보 필터링, Reflection 검토를 종합해 최종 추천 결과와 예외 대안을 확정한다.",
+                action="agent.finalize",
+                action_input={
+                    "requested_top_k": top_k,
+                    "final_count": len(final),
+                    "reflection_approved": reflection.approved,
+                    "reflection_score": reflection.score,
+                },
+                observation={
+                    "final_recommendations": [
+                        {
+                            "name": item.get("name"),
+                            "region": item.get("region"),
+                            "menu": item.get("menu"),
+                            "score": item.get("score"),
+                        }
+                        for item in final
+                    ],
+                    "exception_alternative": None
+                    if len(final) >= top_k
+                    else "현재 조건으로는 요청 개수를 모두 채우지 못했습니다. 가격, 리뷰 수, 세부 위치 조건을 완화해 다시 검색할 수 있습니다.",
+                    "not_done": "다른 지역 후보로 임의 대체하지 않음",
+                },
+            )
+        )
 
         return RecommendationResponse(
             input=request,

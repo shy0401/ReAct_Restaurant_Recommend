@@ -48,6 +48,16 @@ def reflection_check(
         "대표 메뉴 정보 확인",
         "사진 source 명확성 확인",
     ]
+    if max_price is not None:
+        checked_items.append(f"가격 상한 {max_price:,}원 이하 여부 확인")
+    if min_rating is not None:
+        checked_items.append(f"평점 {min_rating}점 이상 여부 확인")
+    if min_review_count is not None:
+        checked_items.append(f"리뷰 수 {min_review_count}개 이상 여부 확인")
+    if companion:
+        checked_items.append(f"{companion} 동행 조건 확인")
+    if purpose:
+        checked_items.append(f"{purpose} 방문 목적 확인")
     score = 10
     critical_issues = 0
 
@@ -103,8 +113,14 @@ def reflection_check(
             if "혼밥" in tags and not any(tag in tags for tag in ["친구", "저녁", "분위기", "데이트", "고기"]):
                 issues.append(f"{name}: 친구와 방문하기에는 혼밥 성격이 강합니다.")
                 score -= 1
+            elif not any(token in " ".join([tags, item.get("reason", ""), item.get("preference_relation", "")]) for token in ["친구", "모임", "분위기"]):
+                issues.append(f"{name}: 친구와 방문 조건 설명이 약합니다.")
+                score -= 1
         if purpose == "저녁" and item.get("category") == "카페" and food_type != "카페":
             issues.append(f"{name}: 저녁 식사 목적에 비해 카페/디저트 성격이 강합니다.")
+            score -= 1
+        elif purpose == "저녁" and "저녁" not in " ".join([item.get("reason", ""), " ".join(item.get("tags", [])), item.get("preference_relation", "")]):
+            issues.append(f"{name}: 저녁 목적 설명이 약합니다.")
             score -= 1
         if weather_condition not in item.get("weather_match", []):
             checked_items.append(f"{name}: 날씨({weather_condition})는 보조 조건으로만 확인")

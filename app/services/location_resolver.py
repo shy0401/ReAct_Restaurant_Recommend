@@ -51,11 +51,9 @@ def resolve_location(query: str) -> LocationResolveResult:
         if kakao and kakao.confidence >= local.confidence:
             return kakao
     if not local.region:
-        local.region = "전주"
-        local.city = "전주"
-        local.source = "fallback"
-        local.confidence = 0.35
-        local.warnings.append("지역을 명확히 찾지 못해 기본 지역인 전주로 추천합니다.")
+        local.source = "unresolved"
+        local.confidence = 0.0
+        local.warnings.append("지역을 명확히 찾지 못했습니다. 추천을 위해 지역을 확인해야 합니다.")
     return local
 
 
