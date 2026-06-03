@@ -93,8 +93,22 @@ python scripts/run_submission_scenario.py
 
 - `submission_outputs/실행로그_trace.json`
 - `submission_outputs/실행로그_trace.txt`
+- `submission_outputs/과제_실행_요약.md`
 
 `submission_outputs`는 `.gitignore`에 포함되어 있으므로 제출 zip에는 필요 시 직접 포함하세요.
+
+Trace 텍스트는 제출 기준에 맞춰 다음 항목을 고정 형식으로 포함합니다.
+
+- User Query
+- Parsed Conditions
+- Agent Reasoning Trace
+- Step N / Thought / Action / Action Input / Observation
+- Candidate Filtering Result
+- Reflection Review Result
+- Final Answer
+- 예외 발생 시 Suggested Queries 또는 조건 완화 대안
+
+웹 UI의 `AI Agent 추론 과정 보기` 패널에서는 각 Step의 Action과 Observation을 접었다 펼 수 있고, `Trace 복사`와 `제출 로그 다운로드` 버튼으로 브라우저에서 바로 제출 로그를 확보할 수 있습니다.
 
 ## API 명세
 
@@ -228,7 +242,7 @@ npm install
 npm run build
 ```
 
-제출용 로그는 `submission_outputs/실행로그_trace.json`, `submission_outputs/실행로그_trace.txt`에 생성됩니다. zip 제출 시 `.venv/`, `__pycache__/`, `node_modules/`, `.env`, API Key, 캐시 파일은 제외하세요.
+제출용 로그는 `submission_outputs/실행로그_trace.json`, `submission_outputs/실행로그_trace.txt`, `submission_outputs/과제_실행_요약.md`에 생성됩니다. zip 제출 시 `.venv/`, `__pycache__/`, `node_modules/`, `.env`, API Key, 캐시 파일은 제외하세요.
 
 ## 전국 지역 대응 원칙
 

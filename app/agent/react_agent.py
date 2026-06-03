@@ -163,6 +163,19 @@ class FoodReActAgent:
             summary="Reflection 0/10: 지역이 확인되지 않아 맛집 후보를 추천하지 않았습니다.",
             final_changes=["전주 기본 추천으로 덮지 않고 clarification 응답을 반환했습니다."],
         )
+        trace.append(
+            ReActTraceStep(
+                thought="지역 확인이 필요한 예외 상황이므로 최종 추천 대신 대안 쿼리를 확정한다.",
+                action="agent.finalize",
+                action_input={"requested_top_k": request.top_k, "final_count": 0, "error_code": request.error_code},
+                observation={
+                    "final_recommendations": [],
+                    "exception_alternative": reason,
+                    "suggested_queries": suggested_queries,
+                    "not_done": "지역을 확인할 수 없어 다른 지역 후보로 임의 대체하지 않음",
+                },
+            )
+        )
         return RecommendationResponse(
             input=request,
             plan_steps=PLAN_STEPS,
@@ -424,6 +437,24 @@ class FoodReActAgent:
             purpose=request.purpose,
             companion=request.companion,
         )
+        trace.append(
+            ReActTraceStep(
+                thought="초안 추천이 지역, 세부 위치, 가격, 리뷰, 메뉴 중복, 지도/사진 조건을 만족하는지 Reflection으로 검토한다.",
+                action="reflection.check",
+                action_input={
+                    "draft_count": len(draft),
+                    "region": request.region,
+                    "city": request.city,
+                    "area": request.area,
+                    "food_type": request.food_type,
+                    "menu_keyword": request.menu_keyword,
+                    "max_price": request.max_price,
+                    "min_rating": request.min_rating,
+                    "min_review_count": request.min_review_count,
+                },
+                observation=reflection.model_dump(),
+            )
+        )
 
         final = draft
         if not reflection.approved:
@@ -455,6 +486,22 @@ class FoodReActAgent:
                 purpose=request.purpose,
                 companion=request.companion,
             )
+            trace.append(
+                ReActTraceStep(
+                    thought="재정렬된 추천 결과를 다시 Reflection으로 검토해 제출 가능한 최종 품질인지 확인한다.",
+                    action="reflection.check",
+                    action_input={
+                        "draft_count": len(final),
+                        "region": request.region,
+                        "city": request.city,
+                        "area": request.area,
+                        "food_type": request.food_type,
+                        "menu_keyword": request.menu_keyword,
+                        "reranked": True,
+                    },
+                    observation=reflection.model_dump(),
+                )
+            )
 
         if len(final) < top_k:
             trace.append(
@@ -477,6 +524,34 @@ class FoodReActAgent:
             item["reflection_result"] = reflection.summary
         for item in draft:
             item["reflection_result"] = reflection.summary
+
+        trace.append(
+            ReActTraceStep(
+                thought="모든 도구 호출, 후보 필터링, Reflection 검토를 종합해 최종 추천 결과와 예외 대안을 확정한다.",
+                action="agent.finalize",
+                action_input={
+                    "requested_top_k": top_k,
+                    "final_count": len(final),
+                    "reflection_approved": reflection.approved,
+                    "reflection_score": reflection.score,
+                },
+                observation={
+                    "final_recommendations": [
+                        {
+                            "name": item.get("name"),
+                            "region": item.get("region"),
+                            "menu": item.get("menu"),
+                            "score": item.get("score"),
+                        }
+                        for item in final
+                    ],
+                    "exception_alternative": None
+                    if len(final) >= top_k
+                    else "현재 조건으로는 요청 개수를 모두 채우지 못했습니다. 가격, 리뷰 수, 세부 위치 조건을 완화해 다시 검색할 수 있습니다.",
+                    "not_done": "다른 지역 후보로 임의 대체하지 않음",
+                },
+            )
+        )
 
         return RecommendationResponse(
             input=request,

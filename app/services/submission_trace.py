@@ -19,18 +19,32 @@ def build_submission_trace_text(
     lines.append("Parsed Conditions:")
     lines.append(json.dumps(parsed_conditions.model_dump(), ensure_ascii=False, indent=2))
     lines.append("")
+    lines.append("Agent Reasoning Trace:")
+    lines.append("")
 
     for index, step in enumerate(result.react_trace, start=1):
         lines.append(f"Step {index}")
-        lines.append("Thought:")
+        lines.append("Thought")
         lines.append(step.thought)
-        lines.append("Action:")
+        lines.append("Action")
         lines.append(step.action)
-        lines.append("Action Input:")
+        lines.append("Action Input")
         lines.append(_format_json(step.action_input))
-        lines.append("Observation:")
+        lines.append("Observation")
         lines.append(_format_json(step.observation))
         lines.append("")
+
+    lines.append("Candidate Filtering Result:")
+    score_steps = [step for step in result.react_trace if step.action == "agent.score_and_draft"]
+    if score_steps:
+        lines.append(_format_json(score_steps[-1].observation))
+    else:
+        lines.append("후보 필터링 단계가 실행되지 않았습니다.")
+    lines.append("")
+
+    lines.append("Reflection Review Result:")
+    lines.append(_format_json(result.reflection.model_dump()))
+    lines.append("")
 
     lines.append("Final Answer:")
     if result.final_recommendations:
@@ -59,9 +73,6 @@ def build_submission_trace_text(
         lines.append("Suggested Queries:")
         for query in parsed_conditions.suggested_queries:
             lines.append(f"- {query}")
-    lines.append("")
-    lines.append("Reflection:")
-    lines.append(_format_json(result.reflection.model_dump()))
     return "\n".join(lines)
 
 
