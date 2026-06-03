@@ -46,6 +46,12 @@ python -m pytest -q
 python scripts/run_submission_scenario.py
 ```
 
+제출 zip 생성:
+
+```powershell
+python scripts/package_submission.py
+```
+
 프론트엔드 빌드:
 
 ```powershell
@@ -94,6 +100,7 @@ cd ..
 - [ ] 필요 시 `submission_outputs/실행로그_trace.txt`
 - [ ] 필요 시 `submission_outputs/실행로그_trace.json`
 - [ ] 필요 시 `submission_outputs/과제_실행_요약.md`
+- [ ] 자동 생성된 `submission_outputs/신하윤_202112026_실습4.zip`
 
 ## 6. 제출 zip에서 제외할 파일
 

@@ -58,8 +58,10 @@ VITE_KAKAO_JAVASCRIPT_KEY=
 
 ```env
 USE_REAL_PLACE_API=true
-KAKAO_REST_API_KEY=발급받은_REST_API_KEY
+KAKAO_REST_API_KEY=
 ```
+
+위 값에 발급받은 Kakao REST API Key를 입력합니다.
 
 주의:
 
@@ -83,9 +85,11 @@ KAKAO_REST_API_KEY=발급받은_REST_API_KEY
 설정:
 
 ```env
-NAVER_CLIENT_ID=발급받은_CLIENT_ID
-NAVER_CLIENT_SECRET=발급받은_CLIENT_SECRET
+NAVER_CLIENT_ID=
+NAVER_CLIENT_SECRET=
 ```
+
+위 값에 발급받은 Naver Client ID와 Client Secret을 입력합니다.
 
 현재 기본 추천 흐름은 Kakao Local API를 시도할 수 있고, Key가 없거나 실패하면 fallback_sample을 사용합니다.
 
@@ -100,9 +104,11 @@ NAVER_CLIENT_SECRET=발급받은_CLIENT_SECRET
 
 ```env
 USE_REAL_PLACE_API=true
-GOOGLE_PLACES_API_KEY=발급받은_GOOGLE_PLACES_API_KEY
+GOOGLE_PLACES_API_KEY=
 BACKEND_PUBLIC_URL=http://localhost:8000
 ```
+
+위 값에 발급받은 Google Places API Key를 입력합니다.
 
 주의:
 

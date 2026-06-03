@@ -111,6 +111,18 @@ python scripts/run_submission_scenario.py
 
 `submission_outputs/`는 기본적으로 git에는 포함하지 않습니다. 제출 zip에 실행 로그가 필요하면 위 명령을 실행한 뒤 직접 포함하면 됩니다.
 
+제출 zip 자동 생성:
+
+```powershell
+python scripts/package_submission.py
+```
+
+기본 출력 파일:
+
+```text
+submission_outputs/신하윤_202112026_실습4.zip
+```
+
 ## 8. ReAct Trace 생성 방법
 
 Trace는 두 방식으로 확인할 수 있습니다.
@@ -253,6 +265,13 @@ API Key가 없어도 서버는 죽지 않습니다.
 - 필요 시 실행 후 생성한 `submission_outputs/실행로그_trace.json`
 - 필요 시 실행 후 생성한 `submission_outputs/과제_실행_요약.md`
 
+자동 생성 명령:
+
+```powershell
+python scripts/run_submission_scenario.py
+python scripts/package_submission.py
+```
+
 ## 15. 제출 zip에서 제외할 파일
 
 - `.venv/`
@@ -279,6 +298,7 @@ API Key가 없어도 서버는 죽지 않습니다.
 
 - [ ] `python -m pytest -q` 통과
 - [ ] `python scripts/run_submission_scenario.py` 실행
+- [ ] `python scripts/package_submission.py` 실행
 - [ ] `cd frontend && npm run build` 통과
 - [ ] README 실행 명령 확인
 - [ ] ReAct Trace에 Thought, Action, Action Input, Observation 포함
