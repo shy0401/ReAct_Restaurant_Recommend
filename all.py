@@ -32,7 +32,12 @@ TARGET_EXTENSIONS = (
     ".env.example",
 )
 
-EXCLUDE_FILES = {".env", "project_combined.txt"}
+EXCLUDE_FILES = {
+    ".env",
+    "project_combined.txt",
+    "place_cache.json",
+    "meal_history.json",
+}
 
 
 def merge_code_efficient(root_dir: str, output_file: str, chunk_size: int = 1024 * 1024) -> None:
