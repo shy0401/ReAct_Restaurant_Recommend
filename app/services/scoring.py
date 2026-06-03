@@ -123,6 +123,18 @@ def price_max(price_range: str | None) -> int | None:
     return max(numbers) if numbers else None
 
 
+def distance_value_km(distance: str | None) -> float | None:
+    if not distance:
+        return None
+    match = re.search(r"(\d+(?:\.\d+)?)\s*km", distance)
+    if match:
+        return float(match.group(1))
+    meter_match = re.search(r"(\d+(?:\.\d+)?)\s*m", distance)
+    if meter_match:
+        return float(meter_match.group(1)) / 1000
+    return None
+
+
 def area_matches(restaurant: dict[str, Any], area: str | None, landmark: str | None = None) -> bool:
     target = area or landmark
     if not target:
@@ -187,6 +199,8 @@ def score_restaurant(
     area: str | None = None,
     food_type: str | None = None,
     menu_keyword: str | None = None,
+    purpose: str | None = None,
+    companion: str | None = None,
 ) -> float:
     score = 0.0
     score += 150 if region_matches(restaurant, region, city) else -1000
@@ -201,6 +215,8 @@ def score_restaurant(
     score += min(int(restaurant.get("review_count", 0) or 0) / 10, 20)
 
     distance_km = restaurant.get("distance_km")
+    if not isinstance(distance_km, (int, float)):
+        distance_km = distance_value_km(restaurant.get("distance"))
     if isinstance(distance_km, (int, float)):
         score += max(0, 20 - float(distance_km) * 4)
     if weather_condition in restaurant.get("weather_match", []):
@@ -213,6 +229,15 @@ def score_restaurant(
         score -= 20
     if min_review_count is not None and int(restaurant.get("review_count", 0) or 0) < min_review_count:
         score -= 15
+    haystack = normalize(restaurant_text(restaurant))
+    if companion == "친구":
+        score += 18 if any(token in haystack for token in ["친구", "친구모임", "모임", "분위기"]) else -8
+    if purpose == "저녁":
+        score += 18 if any(token in haystack for token in ["저녁", "디너", "22:00", "21:30", "22:30"]) else -8
+    if preference and "가성비" in preference:
+        score += 12 if "가성비" in haystack or (max_price is not None and price_max(restaurant.get("price_range")) is not None and price_max(restaurant.get("price_range")) <= max_price) else -5
+    if preference and "리뷰" in preference:
+        score += 10 if int(restaurant.get("review_count", 0) or 0) >= (min_review_count or 50) else -5
     if is_forbidden_for_keyword(restaurant, menu_keyword, food_type):
         score -= 500
     return round(score, 1)
@@ -248,6 +273,9 @@ def enrich_recommendation(
     purpose_note = ""
     if purpose or companion:
         purpose_note = f" {companion or '동행'}와 {purpose or '식사'}하기 좋은 분위기와 메뉴 구성을 함께 봤습니다."
+    distance_note = ""
+    if restaurant.get("area") or restaurant.get("distance"):
+        distance_note = f" {restaurant.get('area') or '요청 위치'} 근처라 이동이 쉽고 거리 정보({restaurant.get('distance', '확인됨')})를 함께 확인했습니다."
 
     return {
         **restaurant,
@@ -272,5 +300,5 @@ def enrich_recommendation(
             if preference_ok
             else f"입력 선호도({preference})와 직접 일치하지 않는 요소가 있어 감점했습니다.{purpose_note}"
         ),
-        "reason": f"{restaurant.get('reason', '요청 조건에 맞는 지역 맛집입니다.')} {price_note} {review_note}",
+        "reason": f"{restaurant.get('reason', '요청 조건에 맞는 지역 맛집입니다.')}{distance_note}{purpose_note} {price_note} {review_note}",
     }

@@ -6,6 +6,7 @@ from app.main import app
 
 
 client = TestClient(app)
+ASSIGNMENT_QUERY = "전주 객사 근처에서 친구랑 저녁 먹기 좋은 맛집을 찾아줘. 너무 비싸지 않고, 리뷰가 좋은 곳 위주로 3곳 추천해줘."
 
 
 def _run(query: str) -> dict:
@@ -29,6 +30,17 @@ def _haystack(item: dict) -> str:
             " ".join(item.get("tags", [])),
         ]
     )
+
+
+def _quality_mentions(item: dict) -> int:
+    text = " ".join([item.get("reason", ""), item.get("preference_relation", ""), " ".join(item.get("tags", []))])
+    groups = [
+        ["친구", "모임"],
+        ["저녁", "디너"],
+        ["가격", "가성비", "15,000", "15000"],
+        ["리뷰", "평점"],
+    ]
+    return sum(1 for group in groups if any(token in text for token in group))
 
 
 def test_jbnu_pasta_request_preserves_menu_and_region_priority() -> None:
@@ -109,6 +121,47 @@ def test_gaeksa_friend_dinner_budget_scenario_keeps_area_and_reflection_score() 
     trace_text = body["submission_trace_text"]
     for token in ["Thought", "Action", "Observation", "Final Answer", "객사", "가격", "리뷰", "친구", "저녁"]:
         assert token in trace_text
+
+
+def test_exact_assignment_scenario_quality_is_locked() -> None:
+    body = _run(ASSIGNMENT_QUERY)
+    parsed = body["parsed_conditions"]
+
+    assert parsed["region"] == "전주"
+    assert parsed["area"] == "객사"
+    assert parsed["companion"] == "친구"
+    assert parsed["purpose"] == "저녁"
+    assert parsed["max_price"] == 15000
+    assert parsed["min_rating"] >= 4.0
+    assert parsed["min_review_count"] >= 50
+
+    recommendations = body["result"]["final_recommendations"]
+    assert len(recommendations) >= 3
+    assert all(item["region"] == "전주" for item in recommendations)
+    assert sum(1 for item in recommendations[:3] if "객사" in _haystack(item) or "객리단길" in _haystack(item)) >= 2
+
+    for item in recommendations[:3]:
+        for field in ["area", "district", "rating", "review_count", "price_range", "distance", "tags", "reason", "menus", "opening_hours", "latitude", "longitude"]:
+            assert item.get(field), f"{item['name']} missing {field}"
+        assert item["rating"] >= 4.0
+        assert item["review_count"] >= 50
+        assert _quality_mentions(item) >= 3
+        assert "가격" in item["reason"] or "15,000" in item["reason"] or "15000" in item["reason"]
+        assert "리뷰" in item["reason"] or "평점" in item["reason"]
+
+    weather_step = next(step for step in body["result"]["react_trace"] if step["action"] == "weather.get_weather")
+    assert weather_step["observation"]["condition"] == "비"
+    restaurant_step = next(step for step in body["result"]["react_trace"] if step["action"] == "restaurant.search_restaurants")
+    assert restaurant_step["action_input"]["food_type"] is None
+    assert restaurant_step["action_input"]["region"] == "전주"
+    assert restaurant_step["action_input"]["area"] == "객사"
+
+    actions = [step["action"] for step in body["result"]["react_trace"]]
+    assert "reflection.check" in actions
+    assert "agent.finalize" in actions
+    assert body["result"]["reflection"]["approved"] is True
+    assert body["result"]["reflection"]["score"] >= 7
+    assert "다른 지역 후보로 임의 대체하지 않음" in body["submission_trace_text"]
 
 
 def test_quick_view_has_numeric_coordinates_and_clear_photo_source() -> None:

@@ -103,6 +103,8 @@ class FoodReActAgent:
                 area=request.area,
                 food_type=request.food_type,
                 menu_keyword=request.menu_keyword,
+                purpose=request.purpose,
+                companion=request.companion,
             )
             ranked.append(
                 enrich_recommendation(
