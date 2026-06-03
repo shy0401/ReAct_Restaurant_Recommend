@@ -1,0 +1,211 @@
+User Query:
+전주 객사 근처에서 친구랑 저녁 먹기 좋은 맛집을 찾아줘. 너무 비싸지 않고, 리뷰가 좋은 곳 위주로 3곳 추천해줘.
+
+Parsed Conditions:
+{
+  "region": "전주",
+  "city": "전주",
+  "district": "완산구",
+  "area": "객사",
+  "preference": "친구와 방문, 저녁, 가성비, 리뷰 좋은 곳",
+  "purpose": "저녁",
+  "companion": "친구",
+  "budget_level": "budget",
+  "max_price": 15000,
+  "min_rating": 4.0,
+  "min_review_count": 50,
+  "top_k": 3
+}
+
+Agent Reasoning Trace:
+
+Step 1
+Thought
+자연어 요청을 구조화된 추천 조건으로 변환해야 하므로 query parser를 실행한다.
+Action
+agent.parse_user_query
+Action Input
+{
+  "query": "전주 객사 근처에서 친구랑 저녁 먹기 좋은 맛집을 찾아줘. 너무 비싸지 않고, 리뷰가 좋은 곳 위주로 3곳 추천해줘."
+}
+Observation
+{
+  "region": "전주",
+  "area": "객사",
+  "purpose": "저녁",
+  "companion": "친구",
+  "max_price": 15000,
+  "min_rating": 4.0,
+  "min_review_count": 50
+}
+
+Step 2
+Thought
+Plan-and-Solve 패턴으로 추천에 필요한 하위 단계를 먼저 계획한다.
+Action
+agent.plan_steps
+Action Input
+{
+  "region": "전주",
+  "area": "객사",
+  "top_k": 3
+}
+Observation
+[
+  "사용자 요청에서 지역과 세부 위치를 분석한다.",
+  "Weather MCP로 날씨를 확인한다.",
+  "Memory MCP로 최근 식사 기록을 확인한다.",
+  "Restaurant MCP로 후보 맛집을 검색한다.",
+  "Place MCP로 상세 정보를 보강한다.",
+  "Reflection으로 추천 결과를 검토한다."
+]
+
+Step 3
+Thought
+지역 기반 날씨가 필요하므로 Weather MCP 서버를 호출한다.
+Action
+weather.get_weather
+Action Input
+{
+  "region": "전주"
+}
+Observation
+{
+  "region": "전주",
+  "condition": "비",
+  "source": "fallback"
+}
+
+Step 4
+Thought
+어제와 오늘 먹은 메뉴를 Memory MCP에 저장해 중복 추천을 피한다.
+Action
+memory.save_meal_history
+Action Input
+{
+  "yesterday_menu": "입력 없음",
+  "today_menu": "입력 없음"
+}
+Observation
+{
+  "saved": true,
+  "recent_meals": ["입력 없음", "입력 없음"]
+}
+
+Step 5
+Thought
+지역, 세부 위치, 가격, 리뷰 조건을 반영해 Restaurant MCP에서 후보를 검색한다.
+Action
+restaurant.search_restaurants
+Action Input
+{
+  "region": "전주",
+  "city": "전주",
+  "district": "완산구",
+  "area": "객사",
+  "preference": "친구와 방문, 저녁, 가성비, 리뷰 좋은 곳",
+  "max_price": 15000,
+  "min_rating": 4.0,
+  "min_review_count": 50,
+  "limit": 10
+}
+Observation
+[
+  {
+    "warning": "relaxed_conditions",
+    "fallback_used": "fallback_sample",
+    "not_done": "다른 지역 후보로 임의 대체하지 않음"
+  },
+  {
+    "name": "객사 소담전골",
+    "region": "전주",
+    "area": "객사",
+    "price_range": "9000-14000",
+    "rating": 4.6,
+    "review_count": 156
+  }
+]
+
+Step 6
+Thought
+추천 맛집의 실제 메뉴, 사진, 지도 좌표를 확인해야 하므로 Place MCP를 호출한다.
+Action
+place.get_place_detail
+Action Input
+{
+  "place_id": "jeonju_010",
+  "name": "객사 소담전골",
+  "region": "전주"
+}
+Observation
+{
+  "photo_source": "fallback",
+  "photo_is_fallback": true,
+  "has_coordinates": true,
+  "map_provider": "leaflet"
+}
+
+Step 7
+Thought
+후보별 점수를 계산하고 하드 미스매치 후보를 제거한 뒤 추천 초안을 만든다.
+Action
+agent.score_and_draft
+Action Input
+{
+  "candidate_count": 4,
+  "top_k": 3
+}
+Observation
+[
+  {"name": "객사 소담전골", "score": 550.4},
+  {"name": "객리단길 불고기식당", "score": 547.1},
+  {"name": "전주객사 나베우동", "score": 543.5}
+]
+
+Step 8
+Thought
+초안 추천이 지역, 세부 위치, 가격, 리뷰, 동행, 저녁 조건을 만족하는지 Reflection으로 검토한다.
+Action
+reflection.check
+Action Input
+{
+  "draft_count": 3,
+  "region": "전주",
+  "area": "객사",
+  "max_price": 15000,
+  "min_rating": 4.0,
+  "min_review_count": 50
+}
+Observation
+{
+  "approved": true,
+  "score": 10,
+  "issues": [],
+  "checked_items": [
+    "가격 상한 15,000원 이하 여부 확인",
+    "평점 4.0점 이상 여부 확인",
+    "리뷰 수 50개 이상 여부 확인",
+    "친구 동행 조건 확인",
+    "저녁 방문 목적 확인"
+  ]
+}
+
+Final Answer:
+1. 객사 소담전골
+   - 대표 메뉴: 김치전골, 제육한상
+   - 가격대: 9000-14000
+   - 평점: 4.6
+   - 리뷰 수: 156
+   - 추천 이유: 객사 근처라 이동이 쉽고, 15,000원 이하 가격 조건과 리뷰 좋은 곳 조건을 만족하며, 친구와 저녁 식사에 적합합니다.
+2. 객리단길 불고기식당
+   - 대표 메뉴: 뚝배기불고기, 고추장불고기
+   - 가격대: 12000-15000
+   - 평점: 4.5
+   - 리뷰 수: 132
+   - 추천 이유: 객리단길에 있어 객사 접근성이 좋고, 친구와 저녁으로 먹기 좋은 가성비 고기 메뉴입니다.
+3. 전주객사 나베우동
+   - 대표 메뉴: 나베우동, 돈카츠정식
+   - 가격대: 9000-13000
+   - 평점: 4.3
+   - 리뷰 수: 98
+   - 추천 이유: 전주객사 근처에서 부담 없는 가격으로 따뜻한 저녁 메뉴를 먹기 좋습니다.

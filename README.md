@@ -1,141 +1,296 @@
 # 오늘 뭐 먹지 AI
 
-맛집 추천 AI Agent 웹 서비스입니다. 사용자가 지역, 최근 먹은 메뉴, 날씨, 음식 선호도 또는 자연어 요청을 입력하면 Agent가 MCP 도구를 호출하고, ReAct Trace와 Plan-and-Solve 계획, Reflection 검토를 거쳐 최종 맛집 3곳 이상을 추천합니다.
+맛집 추천 AI Agent 웹 서비스입니다. 사용자가 지역, 세부 위치, 최근 먹은 메뉴, 날씨, 음식 선호도 또는 자연어 요청을 입력하면 Agent가 MCP 도구를 호출하고, ReAct Trace와 Plan-and-Solve 계획, Reflection 검토를 거쳐 최종 맛집을 추천합니다.
 
-## 전체 아키텍처
+이 프로젝트는 13주차 실습 과제 제출을 기준으로 다음 항목을 포함합니다.
 
-```text
-React/Vite UI
-  └─ FastAPI app.main
-      ├─ /recommend: 구조화 입력 추천
-      ├─ /agent/run: 자연어 과제 시나리오 실행
-      ├─ /mcp/status: MCP 상태
-      └─ /places/quick-view: 퀵뷰 상세
-          └─ RecommendationService
-              └─ FoodReActAgent
-                  ├─ Weather MCP
-                  ├─ Memory MCP
-                  ├─ Restaurant MCP
-                  └─ Place MCP
-```
+- FastAPI 백엔드와 React/Vite 프론트엔드
+- Weather, Restaurant, Memory, Place MCP 서버 4개
+- 자연어 요청 실행 API `/agent/run`
+- 구조화 입력 추천 API `/recommend`
+- ReAct 도구 호출 Trace와 제출용 Trace 생성 스크립트
+- Reflection 기반 추천 품질 검토
+- API Key 없이 실행 가능한 `fallback_sample` 데이터셋
 
-## Agentic Design Pattern
+## 1. 프로젝트 개요
 
-- **Plan-and-Solve Pattern**: Agent 실행 초반 `agent.plan_steps`에서 지역 분석, MCP 호출, 후보 검색, 상세 보강, Reflection까지의 계획을 먼저 생성합니다.
-- **ReAct Pattern**: `Thought -> Action -> Action Input -> Observation` 형식으로 Weather, Memory, Restaurant, Place MCP를 호출합니다.
-- **Reflection Pattern**: 초안 추천 후 가격, 평점, 리뷰 수, 세부 위치, 친구/저녁 목적, 메뉴 중복, 지도/사진 정보를 검토합니다.
-- **Tool Use Pattern**: MCPClientManager를 통해 각 MCP 서버의 도구를 호출합니다.
-- **Memory Pattern**: Memory MCP가 어제/오늘 먹은 메뉴를 저장하고 중복 메뉴 회피에 사용합니다.
+서비스 이름은 **오늘 뭐 먹지 AI**입니다. 사용자의 조건을 아래 우선순위로 반영합니다.
 
-## MCP 서버 구성
+1. 지역
+2. 세부 위치
+3. 메뉴 키워드
+4. 음식 종류
+5. 가격, 평점, 리뷰 수
+6. 날씨
+7. 최근 먹은 메뉴 중복 회피
 
-- `mcp_servers/weather_server.py`: `get_weather(region)` 제공. Open-Meteo 또는 fallback 날씨 사용.
-- `mcp_servers/restaurant_server.py`: `search_restaurants(...)`, `get_restaurant_detail(...)` 제공. 지역, area, 가격, 평점, 리뷰 수 조건 검색과 조건 완화 검색을 지원합니다.
-- `mcp_servers/memory_server.py`: `save_meal_history`, `get_recent_meals`, `check_duplicate` 제공.
-- `mcp_servers/place_server.py`: `search_real_places`, `get_place_detail`, `get_place_photos`, `get_place_menu`, `get_static_map` 제공.
+날씨가 비나 추움이어도 사용자가 `파스타`, `초밥`, `카페`처럼 메뉴나 음식 종류를 명시하면 날씨가 그 조건을 덮어쓰지 않습니다. 지역도 다른 지역으로 임의 완화하지 않습니다.
 
-## 자연어 시나리오 실행
+## 2. 실행 환경
 
-과제 예시 문장을 그대로 실행할 수 있습니다.
+- Python 3.11 이상
+- Node.js 18 이상 권장
+- Windows PowerShell 기준 명령어 제공
+- LLM API Key는 선택 사항
+- 외부 장소 API Key도 선택 사항
 
-```bash
-curl -X POST http://localhost:8000/agent/run ^
-  -H "Content-Type: application/json" ^
-  -d "{\"query\":\"전주 객사 근처에서 친구랑 저녁 먹기 좋은 맛집을 찾아줘. 너무 비싸지 않고, 리뷰가 좋은 곳 위주로 3곳 추천해줘.\",\"yesterday_menu\":\"입력 없음\",\"today_menu\":\"입력 없음\",\"weather\":null}"
-```
+## 3. 설치 방법
 
-응답에는 `parsed_conditions`, `result.react_trace`, `result.plan_steps`, `result.reflection`, `submission_trace_text`가 포함됩니다.
-
-## 실행 방법
-
-백엔드:
-
-```bash
+```powershell
 python -m venv .venv
 .\.venv\Scripts\activate
 pip install -r requirements.txt
+```
+
+프론트엔드는 별도 설치합니다.
+
+```powershell
+cd frontend
+npm install
+cd ..
+```
+
+## 4. 백엔드 실행
+
+```powershell
 uvicorn app.main:app --reload --port 8000
 ```
 
-MCP 서버를 별도 프로세스로 확인하고 싶을 때:
+접속:
 
-```bash
-python mcp_servers/weather_server.py
-python mcp_servers/restaurant_server.py
-python mcp_servers/memory_server.py
-python mcp_servers/place_server.py
-```
+- FastAPI Docs: http://localhost:8000/docs
+- Health Check: http://localhost:8000/health
+- MCP Status: http://localhost:8000/mcp/status
 
-프론트엔드:
+## 5. 프론트엔드 실행
 
-```bash
+```powershell
 cd frontend
-npm install
 npm run dev
 ```
 
 접속:
 
 - Web UI: http://localhost:5173
-- FastAPI Docs: http://localhost:8000/docs
 
-## 테스트와 제출 로그
+프론트엔드는 기본적으로 자연어 입력을 `/agent/run`으로 전송합니다. 구조화 입력 API인 `/recommend`도 백엔드 문서에서 직접 테스트할 수 있습니다.
 
-```bash
+## 6. 테스트 실행
+
+```powershell
 python -m pytest -q
+```
+
+프론트엔드 빌드 확인:
+
+```powershell
 cd frontend
 npm run build
 cd ..
+```
+
+## 7. 과제 시나리오 실행 방법
+
+과제 문장:
+
+```text
+전주 객사 근처에서 친구랑 저녁 먹기 좋은 맛집을 찾아줘. 너무 비싸지 않고, 리뷰가 좋은 곳 위주로 3곳 추천해줘.
+```
+
+실행:
+
+```powershell
 python scripts/run_submission_scenario.py
 ```
 
-`scripts/run_submission_scenario.py`는 아래 파일을 생성합니다.
+생성 파일:
 
 - `submission_outputs/실행로그_trace.json`
 - `submission_outputs/실행로그_trace.txt`
 - `submission_outputs/과제_실행_요약.md`
 
-`submission_outputs`는 `.gitignore`에 포함되어 있으므로 제출 zip에는 필요 시 직접 포함하세요.
+`submission_outputs/`는 기본적으로 git에는 포함하지 않습니다. 제출 zip에 실행 로그가 필요하면 위 명령을 실행한 뒤 직접 포함하면 됩니다.
 
-Trace 텍스트는 제출 기준에 맞춰 다음 항목을 고정 형식으로 포함합니다.
+## 8. ReAct Trace 생성 방법
 
-- User Query
-- Parsed Conditions
-- Agent Reasoning Trace
-- Step N / Thought / Action / Action Input / Observation
-- Candidate Filtering Result
-- Reflection Review Result
-- Final Answer
-- 예외 발생 시 Suggested Queries 또는 조건 완화 대안
+Trace는 두 방식으로 확인할 수 있습니다.
 
-웹 UI의 `AI Agent 추론 과정 보기` 패널에서는 각 Step의 Action과 Observation을 접었다 펼 수 있고, `Trace 복사`와 `제출 로그 다운로드` 버튼으로 브라우저에서 바로 제출 로그를 확보할 수 있습니다.
+1. 웹 UI의 **AI Agent 추론 과정 보기** 패널에서 확인
+2. `python scripts/run_submission_scenario.py`로 제출용 로그 생성
 
-## API 명세
+Trace 고정 형식:
 
-### POST `/recommend`
+```text
+User Query:
+...
 
-구조화된 JSON 입력으로 추천합니다.
+Parsed Conditions:
+...
 
-```json
-{
-  "region": "전주",
-  "area": "객사",
-  "yesterday_menu": "치킨",
-  "today_menu": "라면",
-  "weather": null,
-  "preference": "따뜻한 한식, 국물 음식",
-  "max_price": 15000,
-  "min_rating": 4.0,
-  "min_review_count": 50,
-  "top_k": 3,
-  "purpose": "저녁",
-  "companion": "친구"
-}
+Step N
+Thought
+...
+Action
+...
+Action Input
+...
+Observation
+...
+
+Reflection Review Result:
+...
+
+Final Answer:
+...
 ```
+
+프론트엔드에는 Trace 복사와 제출 로그 다운로드 버튼이 있습니다.
+
+## 9. 사용한 Agentic Design Pattern 설명
+
+자세한 설명은 [docs/agentic_design_patterns.md](docs/agentic_design_patterns.md)를 참고하세요.
+
+| Pattern | 적용 위치 | Trace 확인 방법 |
+| --- | --- | --- |
+| ReAct Pattern | `app/agent/react_agent.py` | `Thought`, `Action`, `Action Input`, `Observation` |
+| Plan-and-Solve Pattern | `agent.plan_steps` | Trace의 `agent.plan_steps` Action |
+| Reflection Pattern | `app/agent/reflection.py` | Trace의 `reflection.check` Action |
+| Tool Use Pattern | `app/mcp_clients/mcp_client_manager.py` | `weather.*`, `restaurant.*`, `memory.*`, `place.*` Action |
+| Memory Pattern | `mcp_servers/memory_server.py` | `memory.save_meal_history` Action |
+
+## 10. 도구 목록과 역할
+
+| MCP Server | 파일 | 주요 Tool | 역할 |
+| --- | --- | --- | --- |
+| Weather MCP | `mcp_servers/weather_server.py` | `get_weather(region)` | 지역 기반 날씨 조회, Open-Meteo 또는 fallback |
+| Restaurant MCP | `mcp_servers/restaurant_server.py` | `search_restaurants(...)`, `get_restaurant_detail(...)` | 지역, 세부 위치, 메뉴, 가격, 평점, 리뷰 기반 후보 검색 |
+| Memory MCP | `mcp_servers/memory_server.py` | `save_meal_history`, `get_recent_meals`, `check_duplicate` | 최근 식사 기록 저장과 중복 회피 |
+| Place MCP | `mcp_servers/place_server.py` | `get_place_detail`, `get_place_photos`, `get_place_menu`, `get_static_map` | 퀵뷰 상세, 사진, 메뉴, 지도 좌표 보강 |
+
+FastAPI 테스트와 웹 서비스에서는 `MCPClientManager`가 같은 Tool 함수를 직접 호출하므로, 별도 MCP 프로세스를 켜지 않아도 동작합니다. MCP 서버 파일은 아래처럼 개별 실행도 가능합니다.
+
+```powershell
+python mcp_servers/weather_server.py
+python mcp_servers/restaurant_server.py
+python mcp_servers/memory_server.py
+python mcp_servers/place_server.py
+```
+
+## 11. 외부 API 사용 방법
+
+자세한 설정은 [docs/api_usage.md](docs/api_usage.md)를 참고하세요.
+
+백엔드 `.env` 예시:
+
+```env
+OPENAI_API_KEY=
+USE_LLM=false
+WEATHER_API_MODE=fallback
+DATABASE_URL=sqlite:///./food_agent.db
+FRONTEND_ORIGIN=http://localhost:5173
+
+USE_REAL_PLACE_API=true
+KAKAO_REST_API_KEY=
+NAVER_CLIENT_ID=
+NAVER_CLIENT_SECRET=
+GOOGLE_PLACES_API_KEY=
+MAP_PROVIDER=leaflet
+PLACE_CACHE_TTL_HOURS=24
+BACKEND_PUBLIC_URL=http://localhost:8000
+```
+
+프론트엔드 `frontend/.env` 예시:
+
+```env
+VITE_API_BASE_URL=http://localhost:8000
+VITE_MAP_PROVIDER=leaflet
+VITE_KAKAO_JAVASCRIPT_KEY=
+```
+
+주의:
+
+- Kakao Local REST API Key와 Kakao Maps JavaScript Key는 다릅니다.
+- 실제 음식점 사진은 Kakao Local API만으로 안정적으로 가져올 수 없습니다.
+- 실제 사진을 원하면 `GOOGLE_PLACES_API_KEY`가 필요합니다.
+- Google API Key는 프론트엔드에 노출하지 않고 백엔드 `/places/photo` 프록시를 사용합니다.
+
+## 12. API Key가 없을 때 fallback 데이터셋으로 실행되는 방식
+
+API Key가 없어도 서버는 죽지 않습니다.
+
+- 날씨: `WEATHER_API_MODE=fallback`이면 fallback 날씨를 사용합니다.
+- 장소 검색: `USE_REAL_PLACE_API=true`여도 Kakao Key가 없으면 `app/data/restaurants.json`의 `fallback_sample`을 사용합니다.
+- 실제 사진: Google Places Key가 없으면 placeholder 이미지를 사용하고 UI에 기본 이미지임을 표시합니다.
+- 지도: Key 없이도 Leaflet + OpenStreetMap으로 좌표 기반 지도를 표시합니다.
+- 특정 지역 샘플 데이터가 없으면 다른 지역 후보로 채우지 않고 부족 안내를 반환합니다.
+
+## 13. 예외 처리 전략
+
+| 상황 | 처리 방식 |
+| --- | --- |
+| 모르는 지역 | 추천 중단, `needs_clarification=true`, suggested queries 제공 |
+| 조건 부족 | 지역이 없으면 확인 요청, 지역만 있으면 추천 진행과 warning 기록 |
+| 음식 종류 모호 | 평점/거리/가격 중심 추천, Trace에 모호함 Observation 기록 |
+| API 호출 실패 | 앱 500으로 올리지 않고 Tool Observation에 실패와 fallback 전략 기록 |
+| 검색 결과 없음 | `no_search_results` 또는 `not_enough_strict_candidates` Observation 기록 |
+| 후보 부족 | 다른 지역으로 보강하지 않고 부족한 개수만 반환 |
+| Reflection 미승인 | hard mismatch 제거, 재정렬 또는 부족 안내 |
+
+## 14. 제출 zip에 포함할 파일
+
+- `app/`
+- `mcp_servers/`
+- `frontend/`
+- `scripts/`
+- `tests/`
+- `docs/`
+- `README.md`
+- `requirements.txt`
+- `.env.example`
+- `frontend/.env.example`
+- `.gitignore`
+- 필요 시 실행 후 생성한 `submission_outputs/실행로그_trace.txt`
+- 필요 시 실행 후 생성한 `submission_outputs/실행로그_trace.json`
+- 필요 시 실행 후 생성한 `submission_outputs/과제_실행_요약.md`
+
+## 15. 제출 zip에서 제외할 파일
+
+- `.venv/`
+- `venv/`
+- `__pycache__/`
+- `.pytest_cache/`
+- `node_modules/`
+- `frontend/node_modules/`
+- `frontend/dist/`
+- `.env`
+- API Key가 들어 있는 파일
+- `app/data/place_cache.json`
+- IDE 설정 파일
+
+제출 파일명 예시:
+
+```text
+신하윤_202112026_실습4.zip
+```
+
+## 16. 제출 전 체크리스트
+
+자세한 체크리스트는 [docs/submission_checklist.md](docs/submission_checklist.md)를 참고하세요.
+
+- [ ] `python -m pytest -q` 통과
+- [ ] `python scripts/run_submission_scenario.py` 실행
+- [ ] `cd frontend && npm run build` 통과
+- [ ] README 실행 명령 확인
+- [ ] ReAct Trace에 Thought, Action, Action Input, Observation 포함
+- [ ] Reflection 결과 포함
+- [ ] 과제 문장 최종 추천 3곳 확인
+- [ ] `.env`, API Key, `.venv`, `node_modules` 제외
+
+## 주요 API
 
 ### POST `/agent/run`
 
-자연어 요청을 파싱한 뒤 기존 추천 Agent를 실행합니다.
+자연어 요청을 파싱한 뒤 추천 Agent를 실행합니다.
 
 ```json
 {
@@ -146,152 +301,55 @@ Trace 텍스트는 제출 기준에 맞춰 다음 항목을 고정 형식으로 
 }
 ```
 
-### POST `/places/quick-view`
+응답에는 `parsed_conditions`, `result.react_trace`, `result.reflection`, `result.final_recommendations`, `submission_trace_text`가 포함됩니다.
 
-추천 카드의 퀵뷰 모달 상세 정보를 반환합니다.
+### POST `/recommend`
 
-## 외부 API와 fallback
-
-`.env.example`을 참고해 `.env`를 만듭니다.
-
-```env
-OPENAI_API_KEY=
-USE_LLM=false
-WEATHER_API_MODE=fallback
-DATABASE_URL=sqlite:///./food_agent.db
-FRONTEND_ORIGIN=http://localhost:5173
-
-USE_REAL_PLACE_API=false
-KAKAO_REST_API_KEY=
-NAVER_CLIENT_ID=
-NAVER_CLIENT_SECRET=
-GOOGLE_PLACES_API_KEY=
-MAP_PROVIDER=leaflet
-PLACE_CACHE_TTL_HOURS=24
-BACKEND_PUBLIC_URL=http://localhost:8000
-```
-
-프론트엔드 `.env`:
-
-```env
-VITE_API_BASE_URL=http://localhost:8000
-VITE_MAP_PROVIDER=leaflet
-VITE_KAKAO_JAVASCRIPT_KEY=
-```
-
-- Kakao Local API는 장소명, 주소, 좌표, 전화번호 중심 정보를 제공합니다.
-- Kakao REST API 키와 Kakao Maps JavaScript 키는 다릅니다.
-- 실제 음식점 사진을 가져오려면 `GOOGLE_PLACES_API_KEY`가 필요합니다.
-- API Key가 없으면 fallback 이미지를 표시합니다. 이는 오류가 아니라 API Key 없는 상태의 정상 동작입니다.
-- 지도는 API Key 없이도 Leaflet + OpenStreetMap으로 표시됩니다.
-
-## 지도와 이미지 확인 포인트
-
-- 지도는 `PlaceMap.jsx`에서 Leaflet 컴포넌트로 렌더링합니다.
-- OpenStreetMap URL은 이미지가 아니므로 `img src`에 넣지 않습니다.
-- `latitude`, `longitude`가 문자열이어도 숫자로 변환합니다.
-- `/places/quick-view` 응답의 `map.has_coordinates`가 `true`이면 지도 미리보기가 표시됩니다.
-- placeholder 이미지는 `frontend/public/placeholders/` 기준으로 제공됩니다.
-## 최종 보강 사항: 추천 우선순위
-
-명시적인 사용자 조건이 날씨 추천 힌트에 덮이지 않도록 아래 우선순위를 코드와 테스트에 반영했습니다.
-
-1. 지역
-2. 세부 위치
-3. 원하는 메뉴 또는 음식 종류
-4. 가격대, 가성비
-5. 평점, 리뷰 수
-6. 날씨
-7. 최근 먹은 메뉴 중복 회피
-
-예를 들어 `양식 파스타 먹고싶어. 전북대 근처 가성비 있는 곳`은 `region=전주`, `area=전북대`, `food_type=양식`, `menu_keyword=파스타`, `max_price=15000`으로 파싱됩니다. 날씨가 비여도 국밥, 전골, 삼계탕, 찌개 같은 한식 국물류로 대체하지 않습니다.
-
-## 자연어 실행 API
-
-```http
-POST /agent/run
-```
+구조화된 JSON 입력으로 추천 Agent를 실행합니다.
 
 ```json
 {
-  "query": "양식 파스타 먹고싶어. 전북대 근처 가성비 있는 곳",
+  "region": "전주",
+  "city": "전주",
+  "district": "완산구",
+  "area": "객사",
   "yesterday_menu": "입력 없음",
   "today_menu": "입력 없음",
-  "weather": null
+  "weather": null,
+  "preference": "친구와 방문, 저녁, 가성비, 리뷰 좋은 곳",
+  "max_price": 15000,
+  "min_rating": 4.0,
+  "min_review_count": 50,
+  "top_k": 3,
+  "purpose": "저녁",
+  "companion": "친구"
 }
 ```
 
-응답에는 `parsed_conditions`, `result.react_trace`, `result.reflection`, `result.final_recommendations`, `submission_trace_text`가 포함됩니다. 기본 React 화면도 이 API를 사용합니다.
+### POST `/places/quick-view`
 
-## 실제 데이터 연동과 fallback
-
-- Kakao Local API: 실제 장소명, 주소, 좌표, 전화번호, place_url 보강에 사용합니다.
-- Google Places Photo API: 실제 음식점 사진이 필요할 때 사용합니다. 프론트엔드에는 API 키를 노출하지 않고 `/places/photo` 프록시를 사용합니다.
-- Leaflet + OpenStreetMap: API 키 없이도 지도 미리보기를 표시합니다.
-- Kakao Maps JavaScript SDK: `VITE_KAKAO_JAVASCRIPT_KEY`와 `VITE_MAP_PROVIDER=kakao` 설정 시 브라우저 지도 렌더링에 사용합니다.
-- API 키가 없으면 `fallback_sample` 데이터와 placeholder 이미지를 사용합니다. fallback 이미지는 실제 매장 사진이 아니며 UI에서 기본 이미지로 표시합니다.
-
-## 제출용 테스트 명령
-
-```powershell
-python -m pytest -q
-python scripts/run_submission_scenario.py
-
-cd frontend
-npm install
-npm run build
-```
-
-제출용 로그는 `submission_outputs/실행로그_trace.json`, `submission_outputs/실행로그_trace.txt`, `submission_outputs/과제_실행_요약.md`에 생성됩니다. zip 제출 시 `.venv/`, `__pycache__/`, `node_modules/`, `.env`, API Key, 캐시 파일은 제외하세요.
-
-## 전국 지역 대응 원칙
-
-전국 지역 대응을 위해 `app/services/location_resolver.py`와 `app/data/korea_location_aliases.json`을 추가했습니다. 자연어 요청은 먼저 지역, 도시, 구/군, 세부 위치, 랜드마크로 해석되고, 이후 메뉴/음식 종류 조건과 결합됩니다.
-
-- 지역은 절대 다른 지역으로 완화하지 않습니다.
-- 세부 위치는 같은 지역/도시 안에서만 완화합니다.
-- 메뉴 키워드와 음식 종류는 날씨보다 우선합니다.
-- 후보가 부족하면 다른 지역 후보로 채우지 않고 부족 안내를 반환합니다.
-- API 키가 있으면 Kakao Local API로 실제 전국 장소 검색을 먼저 시도합니다.
-- API 키가 없으면 `fallback_sample` 데이터만 사용합니다.
-
-전국 위치 alias 데이터는 다음 구조를 따릅니다.
+추천 카드의 퀵뷰 상세 정보를 반환합니다.
 
 ```json
 {
-  "대전": {
-    "canonical_region": "대전",
-    "city": "대전",
-    "aliases": ["대전", "대전시", "대전광역시"],
-    "areas": {
-      "구암역": ["구암역", "대전 구암역", "구암역 근처", "구암역 앞"]
-    },
-    "districts": {
-      "구암역": "유성구"
-    },
-    "coordinates": {
-      "구암역": [36.3565, 127.3307]
-    }
-  }
+  "place_id": "jeonju_010",
+  "name": "객사 소담전골",
+  "region": "전주"
 }
 ```
 
-실제 API 역할:
+### GET `/mcp/status`
 
-- Kakao Local API: 전국 장소 검색, 주소, 좌표, 전화번호, place_url
-- Google Places Photo API: 실제 음식점 사진
-- Leaflet/OpenStreetMap: API 키 없이 지도 렌더링
+연결된 MCP 서버 목록과 상태를 반환합니다.
 
-캐시 초기화:
+### GET `/health`
+
+서비스 상태와 LLM 사용 여부를 반환합니다.
+
+## 캐시 초기화
+
+장소 상세 캐시를 지우려면 아래 명령을 실행합니다.
 
 ```powershell
 Remove-Item app\data\place_cache.json -ErrorAction SilentlyContinue
 ```
-
-전국 테스트 예시:
-
-- 대전 구암역 파스타
-- 서울 홍대 초밥
-- 부산 해운대 카페
-- 제주 애월 파스타
-- 전주 객사 저녁
